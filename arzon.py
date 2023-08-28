@@ -186,36 +186,31 @@ def asaxiy():
 
     encoded_query = quote(mahsulot_nomi)
 
-    browser.get(f"https://www.asaxiy.uz/search/?q={encoded_query}")
+    browser.get(f"https://asaxiy.uz/product/sort=cheap?key={encoded_query}")
     wait = WebDriverWait(browser, 30)
 
-    element = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "productList-container")))
+    element = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "product__item.d-flex.flex-column.justify-content-between ")))
 
     asaxiy_page = browser.page_source
     asaxiy_soup = BeautifulSoup(asaxiy_page, "lxml")
     
-    product_check = asaxiy_soup.find("div", attrs={"class":"productlist-catalog el-row is-align-middle el-row--flex"})
+    product_check = asaxiy_soup.find("div", attrs={"class":"row custom-gutter mb-40"})
     if product_check:
         
     
-        asaxiy_products = asaxiy_soup.find_all("div", attrs={"class":"product-item-list el-col el-col-24 el-col-xs-12 el-col-sm-8 el-col-md-12 el-col-lg-8"})
+        asaxiy_products = asaxiy_soup.find_all("div", attrs={"class":"product__item d-flex flex-column justify-content-between"})
         asaxiy_products = asaxiy_products[0:5]
         
         products = []
         
+        
         for product in asaxiy_products:
-            
-            
-            asaxiy_pr_name = product.find("div", attrs={"class":"product-mini__title"}).text.strip()
-            asaxiy_pr_link = product.find("a", attrs={"class":"product-mini"}).get('href')
-            asaxiy_pr_image = product.find("div", attrs={"class":"el-image"}).find("img").get('src')
-            asaxiy_pr_price = product.find("div",attrs={"class":"product-mini__totalLocalPrice"})
-            
-            if asaxiy_pr_price:
-                asaxiy_pr_price = asaxiy_pr_price.find('b').text.strip()
-            else:
-                asaxiy_pr_price = product.find("div",attrs={"class":"product-mini__payment"}).find('b').text.strip()
-                
+
+            asaxiy_pr_name = product.find("span", attrs={"class":"product__item__info-title"}).text.strip()
+            asaxiy_pr_link = product.find("a").get('href')
+            asaxiy_pr_image = product.find("img", attrs={"class":"img-fluid lazyload"}).get('src')
+            asaxiy_pr_price = product.find("span",attrs={"class":"product__item-price"}).text.strip()
+               
             products.append(
                 {
                     'name': asaxiy_pr_name,
@@ -227,7 +222,7 @@ def asaxiy():
         
         def get_price(products):
             price_str = products.get('price', '0')
-            price_str = str(asaxiy_pr_price)[4:].strip().replace(',', '')
+            price_str = str(asaxiy_pr_price)[0:-4].replace(' ', '')
             return float(price_str)
         
         products.sort(key=get_price, reverse=False)
@@ -240,3 +235,4 @@ def asaxiy():
 # uzum()
 # olcha()
 # zoodmall()
+asaxiy()
