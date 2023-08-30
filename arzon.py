@@ -231,8 +231,59 @@ def asaxiy():
     else:
         print("Bunday mahsulot topilmadi")
     
+ 
+def elmakon():
+
+    encoded_query = quote(mahsulot_nomi)
+
+    browser.get(f"https:www.elmakon.uz/?match=all&subcats=Y&pcode_from_q=Y&pshort=Y&pfull=Y&pname=Y&pkeywords=Y&search_performed=Y&q={encoded_query}&dispatch=products.search&security_hash=5456105ab804c2d4bc3604c473676433")
+    wait = WebDriverWait(browser, 30)
+
+    element = wait.until(EC.visibility_of_element_located((By.ID, "products_search_pagination_contents")))
+
+    elmakon_page = browser.page_source
+    elmakon_soup = BeautifulSoup(elmakon_page, "lxml")
+    
+    product_check = elmakon_soup.find("div", attrs={"id":"products_search_pagination_contents"})
+    if product_check:
+        
+    
+        elmakon_products = elmakon_soup.find_all("div", attrs={"class":"ty-column4"})
+        elmakon_products = elmakon_products[0:5]
+        
+        products = []
+        
+        
+        for product in elmakon_products:
+
+            elmakon_pr_name = product.find("div", attrs={"class":"ut2-gl__name"}).find('a').get('title').strip()
+            elmakon_pr_link = product.find('div', attrs={"class": "ut2-gl__image"}).find("a").get('href')
+            elmakon_pr_image = product.find("div", attrs={"class": "ut2-gl__image"}).find('a').find('img').get('src')
+            elmakon_pr_price = product.find("span",attrs={"class":"ty-price-num"}).text.strip()
+               
+            products.append(
+                {
+                    'name': elmakon_pr_name,
+                    'price': elmakon_pr_price,
+                    'link': elmakon_pr_link,
+                    'image_link': elmakon_pr_image
+                }
+            )
+        
+        def get_price(products):
+            price_str = products.get('price', '0')
+            price_str = str(elmakon_pr_price).replace('.', '')
+            return float(price_str)
+        
+        products.sort(key=get_price, reverse=False)
+        pprint(products)
+
+    else:
+        print("Bunday mahsulot topilmadi")
+    
 
 # uzum()
 # olcha()
 # zoodmall()
-asaxiy()
+# asaxiy()
+elmakon()
