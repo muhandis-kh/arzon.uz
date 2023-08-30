@@ -27,6 +27,7 @@ mahsulot_nomi = input("Mahsulot nomini kiriting: ")
 def uzum():
 
     encoded_query = quote(mahsulot_nomi)
+    response = requests.get(f"https://api.uzum.uz/api/search?query={encoded_query}&needsCorrection=1")
 
     browser.get(f"https://uzum.uz/uz/search?query={encoded_query}&needsCorrection=1")
     wait = WebDriverWait(browser, 30)
@@ -76,9 +77,7 @@ def uzum():
 
     else:
         print("Bunday mahsulot topilmadi")
-    
-
- 
+     
 def olcha():
 
     encoded_query = quote(mahsulot_nomi)
@@ -128,7 +127,6 @@ def olcha():
     
  
 def zoodmall():
-
     encoded_query = quote(mahsulot_nomi)
 
     browser.get(f"https://www.zoodmall.uz/search/?q={encoded_query}")
@@ -281,9 +279,62 @@ def elmakon():
     else:
         print("Bunday mahsulot topilmadi")
     
+ 
+def sello():
+
+    encoded_query = quote(mahsulot_nomi)
+    response = requests.get(f"https://stg-api.sello.uz/algolia/search?query={encoded_query}&page=1&perPage=30")
+    data = response.json()
+    pprint(data)
+    # browser.get(f"https://stg-api.sello.uz/algolia/search?query={encoded_query}&page=1&perPage=30")
+    # wait = WebDriverWait(browser, 30)
+
+    # element = wait.until(EC.visibility_of_element_located((By.ID, "products_search_pagination_contents")))
+
+    # sello_page = browser.page_source
+    # sello_soup = BeautifulSoup(sello_page, "lxml")
+    
+    # product_check = sello_soup.find("div", attrs={"id":"products_search_pagination_contents"})
+    # if product_check:
+        
+    
+    #     sello_products = sello_soup.find_all("div", attrs={"class":"ty-column4"})
+    #     sello_products = sello_products[0:5]
+        
+    #     products = []
+        
+        
+    #     for product in sello_products:
+
+    #         sello_pr_name = product.find("div", attrs={"class":"ut2-gl__name"}).find('a').get('title').strip()
+    #         sello_pr_link = product.find('div', attrs={"class": "ut2-gl__image"}).find("a").get('href')
+    #         sello_pr_image = product.find("div", attrs={"class": "ut2-gl__image"}).find('a').find('img').get('src')
+    #         sello_pr_price = product.find("span",attrs={"class":"ty-price-num"}).text.strip()
+               
+    #         products.append(
+    #             {
+    #                 'name': sello_pr_name,
+    #                 'price': sello_pr_price,
+    #                 'link': sello_pr_link,
+    #                 'image_link': sello_pr_image
+    #             }
+    #         )
+        
+    #     def get_price(products):
+    #         price_str = products.get('price', '0')
+    #         price_str = str(sello_pr_price).replace('.', '')
+    #         return float(price_str)
+        
+    #     products.sort(key=get_price, reverse=False)
+    #     pprint(products)
+
+    # else:
+    #     print("Bunday mahsulot topilmadi")
+    
 
 # uzum()
 # olcha()
 # zoodmall()
 # asaxiy()
-elmakon()
+# elmakon()
+# sello()
