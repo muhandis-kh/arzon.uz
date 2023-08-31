@@ -27,7 +27,6 @@ mahsulot_nomi = input("Mahsulot nomini kiriting: ")
 def uzum():
 
     encoded_query = quote(mahsulot_nomi)
-    response = requests.get(f"https://api.uzum.uz/api/search?query={encoded_query}&needsCorrection=1")
 
     browser.get(f"https://uzum.uz/uz/search?query={encoded_query}&needsCorrection=1")
     wait = WebDriverWait(browser, 30)

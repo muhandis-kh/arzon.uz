@@ -94,7 +94,79 @@ def sello():
         pprint(API)
     else:
         print("İstek başarısız oldu. Durum kodu:", response.status_code)
+        
+def olcha():
+    
+    headers = {
+        "Accept-Language": "oz"
+    }
+    response = requests.get(f"https://mobile.olcha.uz/api/v2/products?q={encoded_query}", headers=headers)
+    
+    if response.status_code == 200:    
+        data = response.json()
+        products = data['data']['products'][0:5]
+        API = []
+        for product in products:
+            
+            if product['discount_price']:
+                price = product['discount_price']
+            else:
+                price = product['total_price']
+            API.append(
+                {
+                    'name': product['name_oz'],
+                    'price': price,
+                    'link': f"https://olcha.uz/oz/product/view/{product['alias']}/",
+                    'image_link': product['main_image']
+                }
+            )
+        
+        def get_price(API):
+            price = API.get('price', '0')
+            return float(price)
+        
+        API.sort(key=get_price, reverse=False)
+        pprint(API)
+    else:
+        print("İstek başarısız oldu. Durum kodu:", response.status_code)
+
+def texnomart():
+    
+    headers = {
+        "Accept-Language": "oz"
+    }
+    response = requests.get(f"https://gateway.texnomart.uz/api/common/v1/search/result?q={encoded_query}&sort=&page=1")
+    
+    if response.status_code == 200:    
+        data = response.json()
+        products = data['data']['products'][0:5]
+        API = []
+        for product in products:
+            
+            if product['sale_price']:
+                price = product['sale_price']
+            else:
+                price = product['loan_price']
+            API.append(
+                {
+                    'name': product['name'],
+                    'price': price,
+                    'link': f"https://texnomart.uz/product/detail/{product['id']}",
+                    'image_link': product['image']
+                }
+            )
+        
+        def get_price(API):
+            price = API.get('price', '0')
+            return float(price)
+        
+        API.sort(key=get_price, reverse=False)
+        pprint(API)
+    else:
+        print("İstek başarısız oldu. Durum kodu:", response.status_code)
 
 
-zoodmall()
-sello()
+# zoodmall()
+# sello()
+# olcha()
+texnomart()
