@@ -3,8 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 import requests
 from urllib.parse import quote
-from data.data import zoodmall_api_link, sello_api_link, olcha_api_link, texnomart_api_link
-from pprint import pprint
+from data.data import zoodmall_api_link, sello_api_link, olcha_api_link, texnomart_api_link, korrektor_token
 
 from bs4 import BeautifulSoup
 import requests
@@ -14,22 +13,19 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from urllib.parse import quote
-from selenium.webdriver.common.keys import Keys
-
-
 
 chrome_options = Options()
 # chrome_options.add_argument("--headless")
 chrome_options.add_argument("--incognito")
 
 browser = webdriver.Chrome(options=chrome_options)
-browser_firefox
+
 
 
 def uzum(encoded_query):
 
 
-    browser.get(f"https://uzum.uz/uz/search?query={encoded_query}&ordering=ascending&sorting=price")
+    browser.get(f"https://uzum.uz/uz/search?query={encoded_query}")
     wait = WebDriverWait(browser, 30)
 
     wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "card-info-block")))
@@ -78,9 +74,7 @@ def uzum(encoded_query):
 
     else:
         return ("Uzumda bunday mahsulot topilmadi,", status.HTTP_404_NOT_FOUND )
-    
-    browser.quit()
-  
+     
 def zoodmall(encoded_query, zoodmall_api_link):
     
     url = f"{zoodmall_api_link}{encoded_query}&page=1&sort=1"
@@ -124,10 +118,10 @@ def asaxiy(encoded_query):
 
 
 
-    browser.get(f"https://asaxiy.uz/uz/product/sort=cheap?key={encoded_query}")
+    browser.get(f"https://asaxiy.uz/uz/product/sort=rate-high?key={encoded_query}")
     wait = WebDriverWait(browser, 30)
 
-    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "product__item.d-flex.flex-column.justify-content-between ")))
+    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "container")))
 
     asaxiy_page = browser.page_source
     asaxiy_soup = BeautifulSoup(asaxiy_page, "lxml")
@@ -168,8 +162,6 @@ def asaxiy(encoded_query):
 
     else:
         return ("Asaxiy mahsulot topilmadi,", status.HTTP_404_NOT_FOUND )
-    
-    browser.quit()
  
 def sello(encoded_query, sello_api_link):
     
@@ -294,7 +286,6 @@ def texnomart(encoded_query, texnomart_api_link):
     else:
         return ("Status code:", response.status_code)
 
-
 class SearchProductView(APIView):
     def get(self, request):
         product_name = request.GET.get('query')
@@ -308,13 +299,16 @@ class SearchProductView(APIView):
             result_olcha = olcha(encoded_query, olcha_api_link=olcha_api_link)
             result_texnomart = texnomart(encoded_query, texnomart_api_link=texnomart_api_link)
             
-            return Response({"products": {
-                "uzum": result_uzum,
-                "asaxiy": result_asaxiy,
-                "zoodmall": result_zoodmall,
-                "sello": result_sello,
-                "olcha": result_olcha,
-                "texnomart": result_texnomart
-            } })
+            try:
+                return Response({"products": {
+                    "uzum": result_uzum,
+                    "asaxiy": result_asaxiy,
+                    "zoodmall": result_zoodmall,
+                    "sello": result_sello,
+                    "olcha": result_olcha,
+                    "texnomart": result_texnomart
+                } })
+            except Exception as e:
+                return Response(f"Error message: {e}")
         else:
             return Response({"message": "Product name not provided."})
