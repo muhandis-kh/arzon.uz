@@ -73,7 +73,7 @@ def uzum(encoded_query):
         return products
 
     else:
-        return ("Uzumda bunday mahsulot topilmadi,", status.HTTP_404_NOT_FOUND )
+        return ("Uzumda bunday mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
      
 def zoodmall(encoded_query, zoodmall_api_link):
     
@@ -110,7 +110,7 @@ def zoodmall(encoded_query, zoodmall_api_link):
             API.sort(key=get_price, reverse=False)
             return API
         else:
-            return ("Zoodmallda bunday mahsulot topilmadi,", status.HTTP_404_NOT_FOUND )   
+            return ("Zoodmallda bunday mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )   
     else:
         print("Status code", response.status_code)
                
@@ -161,7 +161,7 @@ def asaxiy(encoded_query):
         return products
 
     else:
-        return ("Asaxiy mahsulot topilmadi,", status.HTTP_404_NOT_FOUND )
+        return ("Asaxiy mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
  
 def sello(encoded_query, sello_api_link):
     
@@ -204,7 +204,7 @@ def sello(encoded_query, sello_api_link):
             API.sort(key=get_price, reverse=False)
             return API
         else:
-            return ("Selloda mahsulot topilmadi,", status.HTTP_404_NOT_FOUND )
+            return ("Selloda mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
     else:
         return ("Status code:", response.status_code)
         
@@ -243,7 +243,7 @@ def olcha(encoded_query, olcha_api_link):
             API.sort(key=get_price, reverse=False)
             return API
         else:
-            return ("Olchada mahsulot topilmadi,", status.HTTP_404_NOT_FOUND )
+            return ("Olchada mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
     else:
         return ("Status code:", response.status_code)
 
@@ -282,7 +282,7 @@ def texnomart(encoded_query, texnomart_api_link):
             API.sort(key=get_price, reverse=False)
             return API
         else:
-            return ("Mahsulot topilmadi,", status.HTTP_404_NOT_FOUND )
+            return ("Mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
     else:
         return ("Status code:", response.status_code)
 
