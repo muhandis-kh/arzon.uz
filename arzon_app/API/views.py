@@ -14,6 +14,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from urllib.parse import quote
 
+from .renderers import UserRenderer
+from .serializers import UserRegistrationSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAuthenticated
+
 chrome_options = Options()
 # chrome_options.add_argument("--headless")
 chrome_options.add_argument("--incognito")
@@ -356,6 +361,7 @@ def get_all_low_price(allProducts):
     return allProducts
 
 class SearchProductView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         product_name = request.GET.get('query')
         encoded_query = quote(product_name)
@@ -385,3 +391,21 @@ class SearchProductView(APIView):
                 return Response(f"Error message: {e}")
         else:
             return Response({"message": "Product name not provided."})
+
+
+""" Authentification Views """
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
+class UserRegistrationView(APIView):
+    renderer_classes = [UserRenderer]
+
+    def post(self, request, format=None):
+        serializer = UserRegistrationSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        token = get_tokens_for_user(user)
+        return Response({'token': token, 'message': "Ro'yhatdan muvaffaqiyatli o'tdingiz"}, status=status.HTTP_201_CREATED)
