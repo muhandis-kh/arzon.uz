@@ -21,6 +21,7 @@ chrome_options.add_argument("--incognito")
 browser = webdriver.Chrome(options=chrome_options)
 
 
+allProducts = []
 
 def uzum(encoded_query):
 
@@ -52,8 +53,19 @@ def uzum(encoded_query):
             uzum_pr_name = uzum_pr_block.text.strip()
             uzum_pr_link = uzum_pr_block.get('href')
 
+            
+            
             uzum_pr_price = product.find("span",attrs={"class":"currency product-card-price slightly medium"}).text.strip().replace('\xa0', ' ').replace(' ', '').replace(',', ' ').replace("so'm", "")
             products.append(
+                {
+                    'name': uzum_pr_name,
+                    'price': int(uzum_pr_price),
+                    'link': "https://uzum.uz"+uzum_pr_link,
+                    'image_link': uzum_pr_image
+                }
+            )
+
+            allProducts.append(
                 {
                     'name': uzum_pr_name,
                     'price': int(uzum_pr_price),
@@ -74,6 +86,8 @@ def uzum(encoded_query):
 
     else:
         return ("Uzumda bunday mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
+    
+    print('passed')
      
 def zoodmall(encoded_query, zoodmall_api_link):
     
@@ -102,6 +116,15 @@ def zoodmall(encoded_query, zoodmall_api_link):
                         'image_link': product['imgUrl']
                     }
                 )
+                
+                allProducts.append(
+                    {
+                        'name': product['name'],
+                        'price': product['localPrice'],
+                        'link': f"https://www.zoodmall.uz/product/{product['productId']}/",
+                        'image_link': product['imgUrl']
+                    }
+                )
             
             def get_price(API):
                 price = API.get('price', '0')
@@ -121,7 +144,7 @@ def asaxiy(encoded_query):
     browser.get(f"https://asaxiy.uz/uz/product/sort=rate-high?key={encoded_query}")
     wait = WebDriverWait(browser, 30)
 
-    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "container")))
+    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "product__item.d-flex.flex-column.justify-content-between ")))
 
     asaxiy_page = browser.page_source
     asaxiy_soup = BeautifulSoup(asaxiy_page, "lxml")
@@ -151,6 +174,15 @@ def asaxiy(encoded_query):
                     'image_link': asaxiy_pr_image
                 }
             )
+
+            allProducts.append(
+                {
+                    'name': asaxiy_pr_name,
+                    'price': int(asaxiy_pr_price),
+                    'link': "https://www.asaxiy.uz"+asaxiy_pr_link,
+                    'image_link': asaxiy_pr_image
+                }
+            )
         
         def get_price(products):
             price_str = products.get('price', '0')
@@ -162,6 +194,8 @@ def asaxiy(encoded_query):
 
     else:
         return ("Asaxiy mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
+    
+    print(passed)
  
 def sello(encoded_query, sello_api_link):
     
@@ -189,6 +223,15 @@ def sello(encoded_query, sello_api_link):
                 else:
                     price = product['price']
                 API.append(
+                    {
+                        'name': product['name'],
+                        'price': price,
+                        'link': f"https://sello.uz/uz/product/{product['slug']}/",
+                        'image_link': f"https://static.sello.uz/unsafe/x500/https://static.sello.uz{product['imageURL']}"
+                    }
+                )
+                
+                allProducts.append(
                     {
                         'name': product['name'],
                         'price': price,
@@ -235,6 +278,15 @@ def olcha(encoded_query, olcha_api_link):
                         'image_link': product['main_image']
                     }
                 )
+
+                allProducts.append(
+                    {
+                        'name': product['name_oz'],
+                        'price': price,
+                        'link': f"https://olcha.uz/oz/product/view/{product['alias']}/",
+                        'image_link': product['main_image']
+                    }
+                )
             
             def get_price(API):
                 price = API.get('price', '0')
@@ -274,6 +326,15 @@ def texnomart(encoded_query, texnomart_api_link):
                         'image_link': product['image']
                     }
                 )
+
+                allProducts.append(
+                    {
+                        'name': product['name'],
+                        'price': price,
+                        'link': f"https://texnomart.uz/product/detail/{product['id']}",
+                        'image_link': product['image']
+                    }
+                )
             
             def get_price(API):
                 price = API.get('price', '0')
@@ -285,6 +346,14 @@ def texnomart(encoded_query, texnomart_api_link):
             return ("Mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
     else:
         return ("Status code:", response.status_code)
+
+def get_all_low_price(allProducts):
+    def get_price(allProducts):
+        price = allProducts.get('price', '0')
+        return float(price)
+
+    allProducts.sort(key=get_price, reverse=False)
+    return allProducts
 
 class SearchProductView(APIView):
     def get(self, request):
@@ -298,16 +367,20 @@ class SearchProductView(APIView):
             result_sello = sello(encoded_query, sello_api_link=sello_api_link)
             result_olcha = olcha(encoded_query, olcha_api_link=olcha_api_link)
             result_texnomart = texnomart(encoded_query, texnomart_api_link=texnomart_api_link)
+            result_all = get_all_low_price(allProducts=allProducts)
             
             try:
-                return Response({"products": {
+                return Response({
+                "products": {
                     "uzum": result_uzum,
                     "asaxiy": result_asaxiy,
                     "zoodmall": result_zoodmall,
                     "sello": result_sello,
                     "olcha": result_olcha,
                     "texnomart": result_texnomart
-                } })
+                }, 
+                "all": result_all
+                                   })
             except Exception as e:
                 return Response(f"Error message: {e}")
         else:
