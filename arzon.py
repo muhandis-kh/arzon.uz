@@ -331,7 +331,7 @@ def sello():
     #     print("Bunday mahsulot topilmadi")
     
 
-# uzum()
+uzum()
 # olcha()
 # zoodmall()
 # asaxiy()
