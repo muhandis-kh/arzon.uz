@@ -20,9 +20,13 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth-telegram/', include('social_django.urls', namespace='social')),
+    path('profile/', TemplateView.as_view(template_name='profile.html'), name='profile'),
+    path('main/', TemplateView.as_view(template_name='login.html')),
     path('', include('arzon_app.urls')),
     path('auth', include('rest_framework.urls')),
     
