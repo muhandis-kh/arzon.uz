@@ -18,16 +18,17 @@ from .renderers import UserRenderer
 from .serializers import UserRegistrationSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
+from pprint import pprint
 
 chrome_options = Options()
-# chrome_options.add_argument("--headless")
+chrome_options.add_argument("--headless")
 chrome_options.add_argument("--incognito")
 
 browser = webdriver.Chrome(options=chrome_options)
 
 
 allProducts = []
-
+  
 def uzum(encoded_query):
 
 
