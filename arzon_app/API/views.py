@@ -14,11 +14,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from urllib.parse import quote
 
+
 from .renderers import UserRenderer
 from .serializers import UserRegistrationSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
-from pprint import pprint
+from .permissions import IsAdminUserOrReadOnly
+from .throttles import CustomBearerTokenRateThrottle
 
 chrome_options = Options()
 chrome_options.add_argument("--headless")
@@ -362,7 +364,8 @@ def get_all_low_price(allProducts):
     return allProducts
 
 class SearchProductView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminUserOrReadOnly, IsAuthenticated]
+    throttle_classes = [CustomBearerTokenRateThrottle]
     def get(self, request):
         product_name = request.GET.get('query')
         encoded_query = quote(product_name)
