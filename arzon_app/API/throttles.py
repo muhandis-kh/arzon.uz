@@ -1,8 +1,8 @@
 from rest_framework.throttling import UserRateThrottle
-from data.data import admin_token
+from data.data import KEY
 
 class CustomBearerTokenRateThrottle(UserRateThrottle):
-    rate = '100/day'  
+    rate = '1/day'  
 
     def allow_request(self, request, view):
 
@@ -16,7 +16,7 @@ class CustomBearerTokenRateThrottle(UserRateThrottle):
         return super().allow_request(request, view)
 
     def validate_token(self, bearer_token):
-        if bearer_token == admin_token:
+        if bearer_token == KEY:
             return True
 
         return False

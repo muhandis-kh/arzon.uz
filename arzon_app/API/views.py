@@ -364,7 +364,7 @@ def get_all_low_price(allProducts):
     return allProducts
 
 class SearchProductView(APIView):
-    permission_classes = [IsAdminUserOrReadOnly, IsAuthenticated]
+    permission_classes = [IsAdminUserOrReadOnly]
     throttle_classes = [CustomBearerTokenRateThrottle]
     def get(self, request):
         product_name = request.GET.get('query')

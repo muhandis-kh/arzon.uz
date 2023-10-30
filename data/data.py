@@ -13,7 +13,7 @@ korrektor_token = os.getenv('korrektor_token')
 bot_token = os.getenv('bot_token')
 secret_key = os.getenv('secret_key')
 
-admin_token = os.getenv('admin_token')
+KEY = os.getenv('key')
 
 django_secret_key = os.getenv('django_secret_key')
 
