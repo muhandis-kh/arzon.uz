@@ -30,7 +30,7 @@ SECRET_KEY = django_secret_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['arzonuz.up.railway.app']
+ALLOWED_HOSTS = ['127.0.0.1','arzonuz.up.railway.app']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://arzonuz.up.railway.app/'
