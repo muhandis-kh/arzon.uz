@@ -29,9 +29,9 @@ chrome_options.add_argument("--incognito")
 browser = webdriver.Chrome(options=chrome_options)
 
 
-allProducts = []
+
   
-def uzum(encoded_query):
+def uzum(encoded_query, allProducts):
 
 
     browser.get(f"https://uzum.uz/uz/search?query={encoded_query}")
@@ -97,7 +97,7 @@ def uzum(encoded_query):
     
     print('passed')
      
-def zoodmall(encoded_query, zoodmall_api_link):
+def zoodmall(encoded_query, zoodmall_api_link, allProducts):
     
     url = f"{zoodmall_api_link}{encoded_query}&page=1&sort=1"
     headers = {
@@ -145,7 +145,7 @@ def zoodmall(encoded_query, zoodmall_api_link):
     else:
         print("Status code", response.status_code)
                
-def asaxiy(encoded_query):
+def asaxiy(encoded_query, allProducts):
 
 
 
@@ -205,7 +205,7 @@ def asaxiy(encoded_query):
     
     print(passed)
  
-def sello(encoded_query, sello_api_link):
+def sello(encoded_query, sello_api_link, allProducts):
     
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
@@ -259,7 +259,7 @@ def sello(encoded_query, sello_api_link):
     else:
         return ("Status code:", response.status_code)
         
-def olcha(encoded_query, olcha_api_link):
+def olcha(encoded_query, olcha_api_link, allProducts):
     
     headers = {
         "Accept-Language": "oz"
@@ -307,7 +307,7 @@ def olcha(encoded_query, olcha_api_link):
     else:
         return ("Status code:", response.status_code)
 
-def texnomart(encoded_query, texnomart_api_link):
+def texnomart(encoded_query, texnomart_api_link, allProducts):
     
     headers = {
         "Accept-Language": "uz"
@@ -367,16 +367,17 @@ class SearchProductView(APIView):
     permission_classes = [IsAdminUserOrReadOnly]
     throttle_classes = [CustomBearerTokenRateThrottle]
     def get(self, request):
+        allProducts = []
         product_name = request.GET.get('query')
         encoded_query = quote(product_name)
         if encoded_query:
 
-            result_uzum = uzum(encoded_query=encoded_query)
-            result_asaxiy = asaxiy(encoded_query=encoded_query)
-            result_zoodmall = zoodmall(encoded_query, zoodmall_api_link=zoodmall_api_link)
-            result_sello = sello(encoded_query, sello_api_link=sello_api_link)
-            result_olcha = olcha(encoded_query, olcha_api_link=olcha_api_link)
-            result_texnomart = texnomart(encoded_query, texnomart_api_link=texnomart_api_link)
+            result_uzum = uzum(encoded_query=encoded_query, allProducts=allProducts)
+            result_asaxiy = asaxiy(encoded_query=encoded_query, allProducts=allProducts)
+            result_zoodmall = zoodmall(encoded_query, zoodmall_api_link=zoodmall_api_link, allProducts=allProducts)
+            result_sello = sello(encoded_query, sello_api_link=sello_api_link, allProducts=allProducts)
+            result_olcha = olcha(encoded_query, olcha_api_link=olcha_api_link, allProducts=allProducts)
+            result_texnomart = texnomart(encoded_query, texnomart_api_link=texnomart_api_link, allProducts=allProducts)
             result_all = get_all_low_price(allProducts=allProducts)
             
             try:
