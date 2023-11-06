@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
-    'whitenoise.runserver_nostatic'
+    'whitenoise.runserver_nostatic',
 
 
     #local apps
