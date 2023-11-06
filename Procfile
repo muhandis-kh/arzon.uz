@@ -1,1 +1,1 @@
-web: python -m pip install --upgrade pip && gunicorn 'core.wsgi'
+web: gunicorn 'core.wsgi'
