@@ -33,7 +33,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['arzonuz.up.railway.app']
 
 CSRF_TRUSTED_ORIGINS = [
-    'arzonuz.up.railway.app'
+    'https://arzonuz.up.railway.app/'
 ]
 
 # Application definition
