@@ -1,4 +1,9 @@
-ARZON.uz (ishchi nomi)
+
+# ARZON.uz (ishchi nomi)
+
+[![GitHub top language](https://img.shields.io/github/languages/top/okh-engineer/arzon.uz?style=flat-square&logo=github)](https://github.com/okh-engineer/arzon.uz)
+
+## Loyiha haqida
 
 Bu loyiha
   1. uzum.uz
