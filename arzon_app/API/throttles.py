@@ -2,7 +2,7 @@ from rest_framework.throttling import UserRateThrottle
 from data.data import KEY
 
 class CustomBearerTokenRateThrottle(UserRateThrottle):
-    rate = '1/day'  
+    rate = '10/day'  
 
     def allow_request(self, request, view):
 
