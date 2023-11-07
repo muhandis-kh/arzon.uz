@@ -6,6 +6,7 @@ bs4==0.0.1
 certifi==2023.5.7
 cffi==1.16.0
 charset-normalizer==3.1.0
+chromedriver-binary==121.0.6109.0.0
 colorama==0.4.6
 coreapi==2.3.3
 coreschema==0.0.4
