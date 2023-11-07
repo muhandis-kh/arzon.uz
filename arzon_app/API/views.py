@@ -22,6 +22,8 @@ from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAdminUserOrReadOnly
 from .throttles import CustomBearerTokenRateThrottle
 import os
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--headless")
@@ -30,8 +32,9 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 
 # browser = webdriver.Chrome(options=chrome_options)
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-browser = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+# chrome_options.binary_location = os.environ.get("/app/.chromedriver/bin/chromedriver")
+# browser = webdriver.Chrome(executable_path=os.environ.get("/app/.apt/usr/bin/google-chrome"), chrome_options=chrome_options)
+browser = webdriver.Chrome(ChromeDriverManager().install())
 
 
   
