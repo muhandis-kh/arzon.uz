@@ -31,11 +31,11 @@ chrome_options.add_argument("--incognito")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 
-# browser = webdriver.Chrome(options=chrome_options)
+browser = webdriver.Chrome(options=chrome_options)
 # chrome_options.binary_location = os.environ.get("/app/.chromedriver/bin/chromedriver")
 # browser = webdriver.Chrome(executable_path=os.environ.get("/app/.apt/usr/bin/google-chrome"), chrome_options=chrome_options)
 # browser = webdriver.Chrome(ChromeDriverManager().install())
-browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+# browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
   
 def uzum(encoded_query, allProducts):
@@ -50,13 +50,13 @@ def uzum(encoded_query, allProducts):
     uzum_soup = BeautifulSoup(uzum_page, "lxml")
     
     
-    product_check = uzum_soup.find("div", attrs={"id":"category-header"})
+    product_check = uzum_soup.find("div", attrs={"id":"category-products"})
     
     if product_check:
 
-        uzum_products_data = uzum_soup.find("div", attrs={"id":"category-content"})
+        uzum_products_data = uzum_soup.find("div", attrs={"id":"category-products"})
 
-        uzum_products = uzum_products_data.find_all("div", attrs={"class":"ui-card"})
+        uzum_products = uzum_products_data.find_all("div", attrs={'data-test-id':"item__product-card"})
 
         uzum_products = uzum_products[0:5]
         
