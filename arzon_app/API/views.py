@@ -25,7 +25,6 @@ import os
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.service import Service
 
-service = Service()
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--incognito")
@@ -36,7 +35,7 @@ chrome_options.add_argument("--no-sandbox")
 # chrome_options.binary_location = os.environ.get("/app/.chromedriver/bin/chromedriver")
 # browser = webdriver.Chrome(executable_path=os.environ.get("/app/.apt/usr/bin/google-chrome"), chrome_options=chrome_options)
 # browser = webdriver.Chrome(ChromeDriverManager().install())
-browser = webdriver.Chrome(service=service, options=chrome_options)
+browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 
   
 def uzum(encoded_query, allProducts):
