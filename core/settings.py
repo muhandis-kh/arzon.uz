@@ -30,7 +30,7 @@ SECRET_KEY = django_secret_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','.railway.app', '.vercel.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'https://arzon-uz.vercel.app/']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://arzonuz.up.railway.app/'
