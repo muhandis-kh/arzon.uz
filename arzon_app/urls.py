@@ -1,6 +1,5 @@
 from django.urls import path
 from arzon_app.API.views import SearchProductView, UserRegistrationView
-from arzon_app.views import index, home
 
 from django.conf import settings
 from django.conf.urls.static import static
