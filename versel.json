@@ -14,8 +14,6 @@
       }
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
-
   "routes": [
     {
       "src": "/static/(.*)",
@@ -25,5 +23,6 @@
       "src": "/(.*)",
       "dest": "core/wsgi.py"
     }
-  ]
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
