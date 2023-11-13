@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from data.data import bot_token, secret_key, django_secret_key
-import os
+import os, dj_database_url
 from datetime import timedelta
 from data import data
 
@@ -30,7 +30,7 @@ SECRET_KEY = django_secret_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh']
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh', '.onrender.com']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://arzonuz.up.railway.app/'
@@ -95,15 +95,18 @@ WSGI_APPLICATION = 'core.wsgi.app'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': data.DATABASE_NAME,
+#         'USER': data.DATABASE_USER,
+#         'PASSWORD': data.DATABASE_PASSWORD,
+#         'HOST': data.DATABASE_HOST,
+#         'PORT': data.DATABASE_PORT,
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': data.DATABASE_NAME,
-        'USER': data.DATABASE_USER,
-        'PASSWORD': data.DATABASE_PASSWORD,
-        'HOST': data.DATABASE_HOST,
-        'PORT': data.DATABASE_PORT,
-    }
+    'default': dj_database_url.parse(data.DATABASE_URL)
 }
 
 
