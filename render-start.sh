@@ -18,3 +18,5 @@ else
 fi
 
 #requirements
+pip install -r requirements.txt
+gunicorn core.wsgi:app
