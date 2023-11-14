@@ -42,6 +42,7 @@ def uzum(encoded_query, allProducts):
 
 
     browser.get(f"https://uzum.uz/uz/search?query={encoded_query}")
+    print(f"https://uzum.uz/uz/search?query={encoded_query}")
     print(browser.page_source)
     wait = WebDriverWait(browser, 30)
 
