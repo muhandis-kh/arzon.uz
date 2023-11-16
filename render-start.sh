@@ -2,12 +2,6 @@
 # exit on error
 set -o errexit
 
-# update package list
-sudo apt-get update
-
-# install xauth
-sudo apt-get install -y xauth
-
 #Chrome
 STORAGE_DIR=/opt/render/project/.render
 
@@ -24,4 +18,4 @@ else
 fi
 
 #requirements
-xvfb-run -a gunicorn core.wsgi:app -t 1800 --keep-alive 1800 
+xvfb-run gunicorn core.wsgi:app -t 1800 --keep-alive 1800 
