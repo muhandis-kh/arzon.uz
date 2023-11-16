@@ -18,4 +18,4 @@ else
 fi
 
 #requirements
-xvfb-run -a gunicorn core.wsgi:app -t 1800 --keep-alive 1800
+xvfb-run -a gunicorn core.wsgi:app -t 1800 --keep-alive 1800 &
