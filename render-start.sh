@@ -2,6 +2,12 @@
 # exit on error
 set -o errexit
 
+# update package list
+sudo apt-get update
+
+# install xauth
+sudo apt-get install -y xauth
+
 #Chrome
 STORAGE_DIR=/opt/render/project/.render
 
