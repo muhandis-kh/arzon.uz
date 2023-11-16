@@ -27,7 +27,7 @@ from selenium.webdriver.common.service import Service
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--headless")
-# chrome_options.add_argument("--incognito")
+chrome_options.add_argument("--incognito")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 
@@ -41,8 +41,8 @@ browser = webdriver.Chrome(options=chrome_options)
 def uzum(encoded_query, allProducts):
 
 
-    browser.get(f"https://uzum.uz/uz/search?query={encoded_query}")
-    print(f"https://uzum.uz/uz/search?query={encoded_query}")
+    browser.get(f"https://uzum.uz/uz/search?query={encoded_query}&needsCorrection=1")
+    print(f"https://uzum.uz/uz/search?query={encoded_query}&needsCorrection=1")
     print(browser.page_source)
     wait = WebDriverWait(browser, 30)
 
