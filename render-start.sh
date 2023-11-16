@@ -17,5 +17,7 @@ else
   echo "...Using Chrome from cache"
 fi
 
+Xvfb :1 -screen 0 1024x768x24 &
+export DISPLAY=:1
 #requirements
 gunicorn core.wsgi:app -t 1800 --keep-alive 1800 
