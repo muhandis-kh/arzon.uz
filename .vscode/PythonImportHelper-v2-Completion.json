@@ -1,0 +1,1083 @@
+[
+    {
+        "label": "IsAdminUser",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "isExtraImport": true,
+        "detail": "rest_framework.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "SAFE_METHODS",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "isExtraImport": true,
+        "detail": "rest_framework.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "IsAuthenticated",
+        "importPath": "rest_framework.permissions",
+        "description": "rest_framework.permissions",
+        "isExtraImport": true,
+        "detail": "rest_framework.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "renderers",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "serializers",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "status",
+        "importPath": "rest_framework",
+        "description": "rest_framework",
+        "isExtraImport": true,
+        "detail": "rest_framework",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "django.contrib.auth.models",
+        "description": "django.contrib.auth.models",
+        "isExtraImport": true,
+        "detail": "django.contrib.auth.models",
+        "documentation": {}
+    },
+    {
+        "label": "UserRateThrottle",
+        "importPath": "rest_framework.throttling",
+        "description": "rest_framework.throttling",
+        "isExtraImport": true,
+        "detail": "rest_framework.throttling",
+        "documentation": {}
+    },
+    {
+        "label": "KEY",
+        "importPath": "data.data",
+        "description": "data.data",
+        "isExtraImport": true,
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "zoodmall_api_link",
+        "importPath": "data.data",
+        "description": "data.data",
+        "isExtraImport": true,
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "sello_api_link",
+        "importPath": "data.data",
+        "description": "data.data",
+        "isExtraImport": true,
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "olcha_api_link",
+        "importPath": "data.data",
+        "description": "data.data",
+        "isExtraImport": true,
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "texnomart_api_link",
+        "importPath": "data.data",
+        "description": "data.data",
+        "isExtraImport": true,
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "korrektor_token",
+        "importPath": "data.data",
+        "description": "data.data",
+        "isExtraImport": true,
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "bot_token",
+        "importPath": "data.data",
+        "description": "data.data",
+        "isExtraImport": true,
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "secret_key",
+        "importPath": "data.data",
+        "description": "data.data",
+        "isExtraImport": true,
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "django_secret_key",
+        "importPath": "data.data",
+        "description": "data.data",
+        "isExtraImport": true,
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "APIView",
+        "importPath": "rest_framework.views",
+        "description": "rest_framework.views",
+        "isExtraImport": true,
+        "detail": "rest_framework.views",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
+        "isExtraImport": true,
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "quote",
+        "importPath": "urllib.parse",
+        "description": "urllib.parse",
+        "isExtraImport": true,
+        "detail": "urllib.parse",
+        "documentation": {}
+    },
+    {
+        "label": "quote",
+        "importPath": "urllib.parse",
+        "description": "urllib.parse",
+        "isExtraImport": true,
+        "detail": "urllib.parse",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "webdriver",
+        "importPath": "selenium",
+        "description": "selenium",
+        "isExtraImport": true,
+        "detail": "selenium",
+        "documentation": {}
+    },
+    {
+        "label": "By",
+        "importPath": "selenium.webdriver.common.by",
+        "description": "selenium.webdriver.common.by",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.common.by",
+        "documentation": {}
+    },
+    {
+        "label": "Options",
+        "importPath": "selenium.webdriver.chrome.options",
+        "description": "selenium.webdriver.chrome.options",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.chrome.options",
+        "documentation": {}
+    },
+    {
+        "label": "WebDriverWait",
+        "importPath": "selenium.webdriver.support.ui",
+        "description": "selenium.webdriver.support.ui",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.support.ui",
+        "documentation": {}
+    },
+    {
+        "label": "expected_conditions",
+        "importPath": "selenium.webdriver.support",
+        "description": "selenium.webdriver.support",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.support",
+        "documentation": {}
+    },
+    {
+        "label": "RefreshToken",
+        "importPath": "rest_framework_simplejwt.tokens",
+        "description": "rest_framework_simplejwt.tokens",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.tokens",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "ChromeDriverManager",
+        "importPath": "webdriver_manager.chrome",
+        "description": "webdriver_manager.chrome",
+        "isExtraImport": true,
+        "detail": "webdriver_manager.chrome",
+        "documentation": {}
+    },
+    {
+        "label": "Service",
+        "importPath": "selenium.webdriver.common.service",
+        "description": "selenium.webdriver.common.service",
+        "isExtraImport": true,
+        "detail": "selenium.webdriver.common.service",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "admin",
+        "importPath": "django.contrib",
+        "description": "django.contrib",
+        "isExtraImport": true,
+        "detail": "django.contrib",
+        "documentation": {}
+    },
+    {
+        "label": "AppConfig",
+        "importPath": "django.apps",
+        "description": "django.apps",
+        "isExtraImport": true,
+        "detail": "django.apps",
+        "documentation": {}
+    },
+    {
+        "label": "TestCase",
+        "importPath": "django.test",
+        "description": "django.test",
+        "isExtraImport": true,
+        "detail": "django.test",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "path",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "include",
+        "importPath": "django.urls",
+        "description": "django.urls",
+        "isExtraImport": true,
+        "detail": "django.urls",
+        "documentation": {}
+    },
+    {
+        "label": "SearchProductView",
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "isExtraImport": true,
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "UserRegistrationView",
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "isExtraImport": true,
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
+        "label": "static",
+        "importPath": "django.conf.urls.static",
+        "description": "django.conf.urls.static",
+        "isExtraImport": true,
+        "detail": "django.conf.urls.static",
+        "documentation": {}
+    },
+    {
+        "label": "render",
+        "importPath": "django.shortcuts",
+        "description": "django.shortcuts",
+        "isExtraImport": true,
+        "detail": "django.shortcuts",
+        "documentation": {}
+    },
+    {
+        "label": "get_asgi_application",
+        "importPath": "django.core.asgi",
+        "description": "django.core.asgi",
+        "isExtraImport": true,
+        "detail": "django.core.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "os,",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os.",
+        "description": "os.",
+        "detail": "os.",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "data",
+        "importPath": "data",
+        "description": "data",
+        "isExtraImport": true,
+        "detail": "data",
+        "documentation": {}
+    },
+    {
+        "label": "TokenObtainPairView",
+        "importPath": "rest_framework_simplejwt.views",
+        "description": "rest_framework_simplejwt.views",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.views",
+        "documentation": {}
+    },
+    {
+        "label": "TokenRefreshView",
+        "importPath": "rest_framework_simplejwt.views",
+        "description": "rest_framework_simplejwt.views",
+        "isExtraImport": true,
+        "detail": "rest_framework_simplejwt.views",
+        "documentation": {}
+    },
+    {
+        "label": "TemplateView",
+        "importPath": "django.views.generic",
+        "description": "django.views.generic",
+        "isExtraImport": true,
+        "detail": "django.views.generic",
+        "documentation": {}
+    },
+    {
+        "label": "get_wsgi_application",
+        "importPath": "django.core.wsgi",
+        "description": "django.core.wsgi",
+        "isExtraImport": true,
+        "detail": "django.core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "pprint",
+        "importPath": "pprint",
+        "description": "pprint",
+        "isExtraImport": true,
+        "detail": "pprint",
+        "documentation": {}
+    },
+    {
+        "label": "IsAdminUserOrReadOnly",
+        "kind": 6,
+        "importPath": "arzon_app.API.permissions",
+        "description": "arzon_app.API.permissions",
+        "peekOfCode": "class IsAdminUserOrReadOnly(IsAdminUser):\n    def has_permission(self, request, view):\n        if request.method in SAFE_METHODS:\n            return True\n        return bool(request.user and request.user.is_staff)",
+        "detail": "arzon_app.API.permissions",
+        "documentation": {}
+    },
+    {
+        "label": "UserRenderer",
+        "kind": 6,
+        "importPath": "arzon_app.API.renderers",
+        "description": "arzon_app.API.renderers",
+        "peekOfCode": "class UserRenderer(renderers.JSONRenderer):\n  charset='utf-8'\n  def render(self, data, accepted_media_type=None, renderer_context=None):\n    response = ''\n    if 'ErrorDetail' in str(data):\n      response = json.dumps({'errors':data})\n    else:\n      response = json.dumps(data)\n    return response",
+        "detail": "arzon_app.API.renderers",
+        "documentation": {}
+    },
+    {
+        "label": "UserRegistrationSerializer",
+        "kind": 6,
+        "importPath": "arzon_app.API.serializers",
+        "description": "arzon_app.API.serializers",
+        "peekOfCode": "class UserRegistrationSerializer(serializers.ModelSerializer):\n  # Ro'yhatdan o'tish vaqtida parolni tekshirish uchun password2 maydoni yaratib olindi\n  password2 = serializers.CharField(style={'input_type':'password'}, write_only=True)\n  class Meta:\n    model = User\n    fields = (\n            \"username\",\n            \"password\",\n            \"password2\",\n        )",
+        "detail": "arzon_app.API.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "CustomBearerTokenRateThrottle",
+        "kind": 6,
+        "importPath": "arzon_app.API.throttles",
+        "description": "arzon_app.API.throttles",
+        "peekOfCode": "class CustomBearerTokenRateThrottle(UserRateThrottle):\n    rate = '10/day'  \n    def allow_request(self, request, view):\n        auth_header = request.META.get('HTTP_AUTHORIZATION', '')\n        if auth_header.startswith('Bearer '):\n            bearer_token = auth_header[len('Bearer '):].strip()\n            if self.validate_token(bearer_token):\n                return True\n        return super().allow_request(request, view)\n    def validate_token(self, bearer_token):",
+        "detail": "arzon_app.API.throttles",
+        "documentation": {}
+    },
+    {
+        "label": "SearchProductView",
+        "kind": 6,
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "peekOfCode": "class SearchProductView(APIView):\n    permission_classes = [IsAdminUserOrReadOnly]\n    throttle_classes = [CustomBearerTokenRateThrottle]\n    def get(self, request):\n        allProducts = []\n        product_name = request.GET.get('query')\n        encoded_query = quote(product_name)\n        if encoded_query:\n            result_uzum = uzum(encoded_query=encoded_query, allProducts=allProducts)\n            result_asaxiy = asaxiy(encoded_query=encoded_query, allProducts=allProducts)",
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "UserRegistrationView",
+        "kind": 6,
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "peekOfCode": "class UserRegistrationView(APIView):\n    renderer_classes = [UserRenderer]\n    def post(self, request, format=None):\n        serializer = UserRegistrationSerializer(data=request.data)\n        serializer.is_valid(raise_exception=True)\n        user = serializer.save()\n        token = get_tokens_for_user(user)\n        return Response({'token': token, 'message': \"Ro'yhatdan muvaffaqiyatli o'tdingiz\"}, status=status.HTTP_201_CREATED)",
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "uzum",
+        "kind": 2,
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "peekOfCode": "def uzum(encoded_query, allProducts):\n    browser.get(f\"https://uzum.uz/uz/search?query={encoded_query}\")\n    print(f\"https://uzum.uz/uz/search?query={encoded_query}\")\n    print(browser.page_source)\n    wait = WebDriverWait(browser, 30)\n    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, \"card-info-block\")))\n    uzum_page = browser.page_source\n    uzum_soup = BeautifulSoup(uzum_page, \"lxml\")\n    product_check = uzum_soup.find(\"div\", attrs={\"id\":\"category-products\"})\n    if product_check:",
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "zoodmall",
+        "kind": 2,
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "peekOfCode": "def zoodmall(encoded_query, zoodmall_api_link, allProducts):\n    url = f\"{zoodmall_api_link}{encoded_query}&page=1&sort=1\"\n    headers = {\n        \"x-lang\": \"uz\",\n        \"x-marketcode\": \"UZ\" \n    }\n    response = requests.get(url, headers=headers)\n    if response.status_code == 200:\n        data = response.json()\n        products = data['marketList'][0:5]",
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "asaxiy",
+        "kind": 2,
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "peekOfCode": "def asaxiy(encoded_query, allProducts):\n    browser.get(f\"https://asaxiy.uz/uz/product/sort=rate-high?key={encoded_query}\")\n    wait = WebDriverWait(browser, 30)\n    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, \"product__item.d-flex.flex-column.justify-content-between \")))\n    asaxiy_page = browser.page_source\n    asaxiy_soup = BeautifulSoup(asaxiy_page, \"lxml\")\n    product_check = asaxiy_soup.find(\"div\", attrs={\"class\":\"row custom-gutter mb-40\"})\n    if product_check:\n        asaxiy_products = asaxiy_soup.find_all(\"div\", attrs={\"class\":\"product__item d-flex flex-column justify-content-between\"})\n        asaxiy_products = asaxiy_products[0:5]",
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "sello",
+        "kind": 2,
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "peekOfCode": "def sello(encoded_query, sello_api_link, allProducts):\n    headers = {\n        \"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\",\n        \"Fingerprint\": \"10b4ad6ce60f51511b502f34c14f8966\",\n        \"Language\": \"uz\" \n    }\n    response = requests.get(f\"{sello_api_link}{encoded_query}&page=1&perPage=30&sortBy=price_asc\", headers=headers)\n    if response.status_code == 200:\n        data = response.json()\n        products = data['hits'][0:5]",
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "olcha",
+        "kind": 2,
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "peekOfCode": "def olcha(encoded_query, olcha_api_link, allProducts):\n    headers = {\n        \"Accept-Language\": \"oz\"\n    }\n    response = requests.get(f\"{olcha_api_link}{encoded_query}\", headers=headers)\n    if response.status_code == 200:    \n        data = response.json()\n        products = data['data']['products'][0:5]\n        API = []\n        if products:",
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "texnomart",
+        "kind": 2,
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "peekOfCode": "def texnomart(encoded_query, texnomart_api_link, allProducts):\n    headers = {\n        \"Accept-Language\": \"uz\"\n    }\n    response = requests.get(f\"{texnomart_api_link}{encoded_query}&sort=&page=1\", headers=headers)\n    if response.status_code == 200:  \n        data = response.json() \n        products = data['data']['products'][0:5]\n        API = []\n        if products:",
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "get_all_low_price",
+        "kind": 2,
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "peekOfCode": "def get_all_low_price(allProducts):\n    def get_price(allProducts):\n        price = allProducts.get('price', '0')\n        return float(price)\n    allProducts.sort(key=get_price, reverse=False)\n    return allProducts\nclass SearchProductView(APIView):\n    permission_classes = [IsAdminUserOrReadOnly]\n    throttle_classes = [CustomBearerTokenRateThrottle]\n    def get(self, request):",
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "get_tokens_for_user",
+        "kind": 2,
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "peekOfCode": "def get_tokens_for_user(user):\n    refresh = RefreshToken.for_user(user)\n    return {\n        'refresh': str(refresh),\n        'access': str(refresh.access_token),\n    }\nclass UserRegistrationView(APIView):\n    renderer_classes = [UserRenderer]\n    def post(self, request, format=None):\n        serializer = UserRegistrationSerializer(data=request.data)",
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "chrome_options",
+        "kind": 5,
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "peekOfCode": "chrome_options = webdriver.ChromeOptions()\nchrome_options.add_argument(\"--headless\")\nchrome_options.add_argument(\"--incognito\")\nchrome_options.add_argument(\"--disable-dev-shm-usage\")\nchrome_options.add_argument(\"--no-sandbox\")\nbrowser = webdriver.Chrome(options=chrome_options)\n# chrome_options.binary_location = os.environ.get(\"/app/.chromedriver/bin/chromedriver\")\n# browser = webdriver.Chrome(executable_path=os.environ.get(\"/app/.apt/usr/bin/google-chrome\"), chrome_options=chrome_options)\n# browser = webdriver.Chrome(ChromeDriverManager().install())\n# browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)",
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "browser",
+        "kind": 5,
+        "importPath": "arzon_app.API.views",
+        "description": "arzon_app.API.views",
+        "peekOfCode": "browser = webdriver.Chrome(options=chrome_options)\n# chrome_options.binary_location = os.environ.get(\"/app/.chromedriver/bin/chromedriver\")\n# browser = webdriver.Chrome(executable_path=os.environ.get(\"/app/.apt/usr/bin/google-chrome\"), chrome_options=chrome_options)\n# browser = webdriver.Chrome(ChromeDriverManager().install())\n# browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)\ndef uzum(encoded_query, allProducts):\n    browser.get(f\"https://uzum.uz/uz/search?query={encoded_query}\")\n    print(f\"https://uzum.uz/uz/search?query={encoded_query}\")\n    print(browser.page_source)\n    wait = WebDriverWait(browser, 30)",
+        "detail": "arzon_app.API.views",
+        "documentation": {}
+    },
+    {
+        "label": "ArzonAppConfig",
+        "kind": 6,
+        "importPath": "arzon_app.apps",
+        "description": "arzon_app.apps",
+        "peekOfCode": "class ArzonAppConfig(AppConfig):\n    default_auto_field = 'django.db.models.BigAutoField'\n    name = 'arzon_app'",
+        "detail": "arzon_app.apps",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "arzon_app.urls",
+        "description": "arzon_app.urls",
+        "peekOfCode": "urlpatterns = [\n    path('search-product/', SearchProductView.as_view(), name='search-product'),\n    path('register/', UserRegistrationView.as_view(), name='register'),\n]",
+        "detail": "arzon_app.urls",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "core.asgi",
+        "description": "core.asgi",
+        "peekOfCode": "application = get_asgi_application()",
+        "detail": "core.asgi",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "SECRET_KEY = secret_key\n# Build paths inside the project like this: BASE_DIR / 'subdir'.\nBASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = django_secret_key\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh', '.onrender.com']",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "BASE_DIR = Path(__file__).resolve().parent.parent\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = django_secret_key\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh', '.onrender.com']\nCSRF_TRUSTED_ORIGINS = [\n    'https://arzon-uz.onrender.com/'",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SECRET_KEY",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "SECRET_KEY = django_secret_key\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\nALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh', '.onrender.com']\nCSRF_TRUSTED_ORIGINS = [\n    'https://arzon-uz.onrender.com/'\n]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEBUG",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "DEBUG = True\nALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh', '.onrender.com']\nCSRF_TRUSTED_ORIGINS = [\n    'https://arzon-uz.onrender.com/'\n]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ALLOWED_HOSTS",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh', '.onrender.com']\nCSRF_TRUSTED_ORIGINS = [\n    'https://arzon-uz.onrender.com/'\n]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "CSRF_TRUSTED_ORIGINS",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "CSRF_TRUSTED_ORIGINS = [\n    'https://arzon-uz.onrender.com/'\n]\n# Application definition\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "INSTALLED_APPS",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "INSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    # global\n    'rest_framework',\n    'rest_framework_simplejwt',",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "MIDDLEWARE",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "MIDDLEWARE = [\n    'django.middleware.security.SecurityMiddleware',\n    'whitenoise.middleware.WhiteNoiseMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATICFILES_STORAGE",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'\nROOT_URLCONF = 'core.urls'\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [BASE_DIR / 'templates'],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT_URLCONF",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "ROOT_URLCONF = 'core.urls'\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [BASE_DIR / 'templates'],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TEMPLATES",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "TEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [BASE_DIR / 'templates'],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',\n                'django.contrib.auth.context_processors.auth',",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "WSGI_APPLICATION",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "WSGI_APPLICATION = 'core.wsgi.app'\n# Database\n# https://docs.djangoproject.com/en/4.2/ref/settings/#databases\n# DATABASES = {\n#     'default': {\n#         'ENGINE': 'django.db.backends.postgresql',\n#         'NAME': data.DATABASE_NAME,\n#         'USER': data.DATABASE_USER,\n#         'PASSWORD': data.DATABASE_PASSWORD,\n#         'HOST': data.DATABASE_HOST,",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASES",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "DATABASES = {\n    'default': dj_database_url.parse(data.DATABASE_URL)\n}\n# Password validation\n# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "AUTH_PASSWORD_VALIDATORS",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "AUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',\n    },",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "LANGUAGE_CODE",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "LANGUAGE_CODE = 'en-us'\nTIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\nif DEBUG:\n    STATICFILES_DIRS = [\n        os.path.join(BASE_DIR, 'static')",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_ZONE",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "TIME_ZONE = 'UTC'\nUSE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\nif DEBUG:\n    STATICFILES_DIRS = [\n        os.path.join(BASE_DIR, 'static')\n    ]",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_I18N",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "USE_I18N = True\nUSE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\nif DEBUG:\n    STATICFILES_DIRS = [\n        os.path.join(BASE_DIR, 'static')\n    ]\nelse:",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "USE_TZ",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "USE_TZ = True\n# Static files (CSS, JavaScript, Images)\n# https://docs.djangoproject.com/en/4.2/howto/static-files/\nSTATIC_URL = 'static/'\nif DEBUG:\n    STATICFILES_DIRS = [\n        os.path.join(BASE_DIR, 'static')\n    ]\nelse:\n    STATIC_ROOT = os.path.join(BASE_DIR, 'static')",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_URL",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "STATIC_URL = 'static/'\nif DEBUG:\n    STATICFILES_DIRS = [\n        os.path.join(BASE_DIR, 'static')\n    ]\nelse:\n    STATIC_ROOT = os.path.join(BASE_DIR, 'static')\n# Default primary key field type\n# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field\nDEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_AUTO_FIELD",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\nREST_FRAMEWORK = {\n    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',\n    'PAGE_SIZE': 10,\n        'DEFAULT_THROTTLE_CLASSES': [\n        'rest_framework.throttling.AnonRateThrottle',\n        'rest_framework.throttling.UserRateThrottle'\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "REST_FRAMEWORK",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "REST_FRAMEWORK = {\n    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',\n    'PAGE_SIZE': 10,\n        'DEFAULT_THROTTLE_CLASSES': [\n        'rest_framework.throttling.AnonRateThrottle',\n        'rest_framework.throttling.UserRateThrottle'\n    ],\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_simplejwt.authentication.JWTAuthentication',\n    )",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "SIMPLE_JWT",
+        "kind": 5,
+        "importPath": "core.settings",
+        "description": "core.settings",
+        "peekOfCode": "SIMPLE_JWT = {\n    \"ACCESS_TOKEN_LIFETIME\": timedelta(days=665),\n    \"REFRESH_TOKEN_LIFETIME\": timedelta(days=700),\n    \"ROTATE_REFRESH_TOKENS\": False,\n    \"BLACKLIST_AFTER_ROTATION\": False,\n    \"UPDATE_LAST_LOGIN\": False,\n    \"ALGORITHM\": \"HS256\",\n    \"SIGNING_KEY\": SECRET_KEY,\n    \"VERIFYING_KEY\": \"\",\n    \"AUDIENCE\": None,",
+        "detail": "core.settings",
+        "documentation": {}
+    },
+    {
+        "label": "urlpatterns",
+        "kind": 5,
+        "importPath": "core.urls",
+        "description": "core.urls",
+        "peekOfCode": "urlpatterns = [\n    path('admin/', admin.site.urls),\n    # path('auth-telegram/', include('social_django.urls', namespace='social')),\n    # path('profile/', TemplateView.as_view(template_name='profile.html'), name='profile'),\n    # path('main/', TemplateView.as_view(template_name='login.html')),\n    path('', include('arzon_app.urls')),\n    path('auth', include('rest_framework.urls')),\n    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),\n    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),\n]",
+        "detail": "core.urls",
+        "documentation": {}
+    },
+    {
+        "label": "application",
+        "kind": 5,
+        "importPath": "core.wsgi",
+        "description": "core.wsgi",
+        "peekOfCode": "application = get_wsgi_application()\napp = application",
+        "detail": "core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "core.wsgi",
+        "description": "core.wsgi",
+        "peekOfCode": "app = application",
+        "detail": "core.wsgi",
+        "documentation": {}
+    },
+    {
+        "label": "zoodmall_api_link",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "zoodmall_api_link = os.getenv('zoodmall_api_link')\nsello_api_link = os.getenv('sello_api_link')\nolcha_api_link = os.getenv('olcha_api_link')\ntexnomart_api_link = os.getenv('texnomart_api_link')\nkorrektor_token = os.getenv('korrektor_token')\nbot_token = os.getenv('bot_token')\nsecret_key = os.getenv('secret_key')\nKEY = os.getenv('key')\ndjango_secret_key = os.getenv('django_secret_key')\nDATABASE_NAME = os.getenv('DATABASE_NAME')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "sello_api_link",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "sello_api_link = os.getenv('sello_api_link')\nolcha_api_link = os.getenv('olcha_api_link')\ntexnomart_api_link = os.getenv('texnomart_api_link')\nkorrektor_token = os.getenv('korrektor_token')\nbot_token = os.getenv('bot_token')\nsecret_key = os.getenv('secret_key')\nKEY = os.getenv('key')\ndjango_secret_key = os.getenv('django_secret_key')\nDATABASE_NAME = os.getenv('DATABASE_NAME')\nDATABASE_USER = os.getenv('DATABASE_USER')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "olcha_api_link",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "olcha_api_link = os.getenv('olcha_api_link')\ntexnomart_api_link = os.getenv('texnomart_api_link')\nkorrektor_token = os.getenv('korrektor_token')\nbot_token = os.getenv('bot_token')\nsecret_key = os.getenv('secret_key')\nKEY = os.getenv('key')\ndjango_secret_key = os.getenv('django_secret_key')\nDATABASE_NAME = os.getenv('DATABASE_NAME')\nDATABASE_USER = os.getenv('DATABASE_USER')\nDATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "texnomart_api_link",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "texnomart_api_link = os.getenv('texnomart_api_link')\nkorrektor_token = os.getenv('korrektor_token')\nbot_token = os.getenv('bot_token')\nsecret_key = os.getenv('secret_key')\nKEY = os.getenv('key')\ndjango_secret_key = os.getenv('django_secret_key')\nDATABASE_NAME = os.getenv('DATABASE_NAME')\nDATABASE_USER = os.getenv('DATABASE_USER')\nDATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')\nDATABASE_HOST = os.getenv('DATABASE_HOST')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "korrektor_token",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "korrektor_token = os.getenv('korrektor_token')\nbot_token = os.getenv('bot_token')\nsecret_key = os.getenv('secret_key')\nKEY = os.getenv('key')\ndjango_secret_key = os.getenv('django_secret_key')\nDATABASE_NAME = os.getenv('DATABASE_NAME')\nDATABASE_USER = os.getenv('DATABASE_USER')\nDATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')\nDATABASE_HOST = os.getenv('DATABASE_HOST')\nDATABASE_PORT = os.getenv('DATABASE_PORT')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "bot_token",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "bot_token = os.getenv('bot_token')\nsecret_key = os.getenv('secret_key')\nKEY = os.getenv('key')\ndjango_secret_key = os.getenv('django_secret_key')\nDATABASE_NAME = os.getenv('DATABASE_NAME')\nDATABASE_USER = os.getenv('DATABASE_USER')\nDATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')\nDATABASE_HOST = os.getenv('DATABASE_HOST')\nDATABASE_PORT = os.getenv('DATABASE_PORT')\nDATABASE_URL = os.getenv('DATABASE_URL')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "secret_key",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "secret_key = os.getenv('secret_key')\nKEY = os.getenv('key')\ndjango_secret_key = os.getenv('django_secret_key')\nDATABASE_NAME = os.getenv('DATABASE_NAME')\nDATABASE_USER = os.getenv('DATABASE_USER')\nDATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')\nDATABASE_HOST = os.getenv('DATABASE_HOST')\nDATABASE_PORT = os.getenv('DATABASE_PORT')\nDATABASE_URL = os.getenv('DATABASE_URL')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "KEY",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "KEY = os.getenv('key')\ndjango_secret_key = os.getenv('django_secret_key')\nDATABASE_NAME = os.getenv('DATABASE_NAME')\nDATABASE_USER = os.getenv('DATABASE_USER')\nDATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')\nDATABASE_HOST = os.getenv('DATABASE_HOST')\nDATABASE_PORT = os.getenv('DATABASE_PORT')\nDATABASE_URL = os.getenv('DATABASE_URL')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "django_secret_key",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "django_secret_key = os.getenv('django_secret_key')\nDATABASE_NAME = os.getenv('DATABASE_NAME')\nDATABASE_USER = os.getenv('DATABASE_USER')\nDATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')\nDATABASE_HOST = os.getenv('DATABASE_HOST')\nDATABASE_PORT = os.getenv('DATABASE_PORT')\nDATABASE_URL = os.getenv('DATABASE_URL')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASE_NAME",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "DATABASE_NAME = os.getenv('DATABASE_NAME')\nDATABASE_USER = os.getenv('DATABASE_USER')\nDATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')\nDATABASE_HOST = os.getenv('DATABASE_HOST')\nDATABASE_PORT = os.getenv('DATABASE_PORT')\nDATABASE_URL = os.getenv('DATABASE_URL')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASE_USER",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "DATABASE_USER = os.getenv('DATABASE_USER')\nDATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')\nDATABASE_HOST = os.getenv('DATABASE_HOST')\nDATABASE_PORT = os.getenv('DATABASE_PORT')\nDATABASE_URL = os.getenv('DATABASE_URL')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASE_PASSWORD",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "DATABASE_PASSWORD = os.getenv('DATABASE_PASSWORD')\nDATABASE_HOST = os.getenv('DATABASE_HOST')\nDATABASE_PORT = os.getenv('DATABASE_PORT')\nDATABASE_URL = os.getenv('DATABASE_URL')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASE_HOST",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "DATABASE_HOST = os.getenv('DATABASE_HOST')\nDATABASE_PORT = os.getenv('DATABASE_PORT')\nDATABASE_URL = os.getenv('DATABASE_URL')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASE_PORT",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "DATABASE_PORT = os.getenv('DATABASE_PORT')\nDATABASE_URL = os.getenv('DATABASE_URL')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "DATABASE_URL",
+        "kind": 5,
+        "importPath": "data.data",
+        "description": "data.data",
+        "peekOfCode": "DATABASE_URL = os.getenv('DATABASE_URL')",
+        "detail": "data.data",
+        "documentation": {}
+    },
+    {
+        "label": "importlib_load_entry_point",
+        "kind": 2,
+        "importPath": "envPacks.Scripts.chromedriver-path-script",
+        "description": "envPacks.Scripts.chromedriver-path-script",
+        "peekOfCode": "def importlib_load_entry_point(spec, group, name):\n    dist_name, _, _ = spec.partition('==')\n    matches = (\n        entry_point\n        for entry_point in distribution(dist_name).entry_points\n        if entry_point.group == group and entry_point.name == name\n    )\n    return next(matches).load()\nglobals().setdefault('load_entry_point', importlib_load_entry_point)\nif __name__ == '__main__':",
+        "detail": "envPacks.Scripts.chromedriver-path-script",
+        "documentation": {}
+    },
+    {
+        "label": "__requires__",
+        "kind": 5,
+        "importPath": "envPacks.Scripts.chromedriver-path-script",
+        "description": "envPacks.Scripts.chromedriver-path-script",
+        "peekOfCode": "__requires__ = 'chromedriver-binary==121.0.6109.0.0'\ntry:\n    from importlib.metadata import distribution\nexcept ImportError:\n    try:\n        from importlib_metadata import distribution\n    except ImportError:\n        from pkg_resources import load_entry_point\ndef importlib_load_entry_point(spec, group, name):\n    dist_name, _, _ = spec.partition('==')",
+        "detail": "envPacks.Scripts.chromedriver-path-script",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "manage",
+        "description": "manage",
+        "peekOfCode": "def main():\n    \"\"\"Run administrative tasks.\"\"\"\n    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')\n    try:\n        from django.core.management import execute_from_command_line\n    except ImportError as exc:\n        raise ImportError(\n            \"Couldn't import Django. Are you sure it's installed and \"\n            \"available on your PYTHONPATH environment variable? Did you \"\n            \"forget to activate a virtual environment?\"",
+        "detail": "manage",
+        "documentation": {}
+    },
+    {
+        "label": "api_url",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "api_url = 'https://graphql.uzum.uz/'\nsearch_query = 'asus vivobook'  # Arama sorgusu\n# İstek başlıklarını ayarlayın (isteğe bağlı)\nheaders = {\n    'Authorization': 'Bearer eyJraWQiOiIwcE9oTDBBVXlWSXF1V0w1U29NZTdzcVNhS2FqYzYzV1N5THZYb0ZhWXRNIiwiYWxnIjoiRWREU0EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJVenVtIElEIiwiaWF0IjoxNjk1NTcwMjAzLCJzdWIiOiI4NGU1MTljNS04YTFhLTQ5OTgtOTNkMC01MzFkYjM1ZDk1MTYiLCJhdWQiOlsidXp1bV9hcHBzIiwibWFya2V0L3dlYiJdLCJldmVudHMiOnsib3RwX3Bhc3NlZCI6MTY5NDUyMTMzOX0sImN1c3RvbWVyX2lkIjoiNjAyM2I3N2ItYjA2ZS00MzQyLTg2NjgtZDhlMmY0ZTZjNjAzIiwicGhvbmVfbnVtYmVyIjoiOTk4OTkxMjcxNDA1IiwiZXhwIjoxNjk1NTcyMTIzfQ.LqX02bdL-2aDpmWWldzwK13HJhNnVlBfl98i0KYKbacIMmQcmrZwyCVkG36Eu8hFp5FAJv98Bb10n6swZxlJCw',  # API anahtarınızı buraya ekleyin (eğer gerekiyorsa)\n    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',  # İsteği hangi kullanıcı ajanıyla gönderdiğinizi belirleyin (isteğe bağlı)\n}\n# İstek parametrelerini veya gövdesini ayarlayın (API belgesine göre)\nparams = {\n    \"queryText\": \"asus\" # İhtiyaç duyulan diğer parametreleri ekleyin (isteğe bağlı)",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "search_query",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "search_query = 'asus vivobook'  # Arama sorgusu\n# İstek başlıklarını ayarlayın (isteğe bağlı)\nheaders = {\n    'Authorization': 'Bearer eyJraWQiOiIwcE9oTDBBVXlWSXF1V0w1U29NZTdzcVNhS2FqYzYzV1N5THZYb0ZhWXRNIiwiYWxnIjoiRWREU0EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJVenVtIElEIiwiaWF0IjoxNjk1NTcwMjAzLCJzdWIiOiI4NGU1MTljNS04YTFhLTQ5OTgtOTNkMC01MzFkYjM1ZDk1MTYiLCJhdWQiOlsidXp1bV9hcHBzIiwibWFya2V0L3dlYiJdLCJldmVudHMiOnsib3RwX3Bhc3NlZCI6MTY5NDUyMTMzOX0sImN1c3RvbWVyX2lkIjoiNjAyM2I3N2ItYjA2ZS00MzQyLTg2NjgtZDhlMmY0ZTZjNjAzIiwicGhvbmVfbnVtYmVyIjoiOTk4OTkxMjcxNDA1IiwiZXhwIjoxNjk1NTcyMTIzfQ.LqX02bdL-2aDpmWWldzwK13HJhNnVlBfl98i0KYKbacIMmQcmrZwyCVkG36Eu8hFp5FAJv98Bb10n6swZxlJCw',  # API anahtarınızı buraya ekleyin (eğer gerekiyorsa)\n    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',  # İsteği hangi kullanıcı ajanıyla gönderdiğinizi belirleyin (isteğe bağlı)\n}\n# İstek parametrelerini veya gövdesini ayarlayın (API belgesine göre)\nparams = {\n    \"queryText\": \"asus\" # İhtiyaç duyulan diğer parametreleri ekleyin (isteğe bağlı)\n}",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "headers",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "headers = {\n    'Authorization': 'Bearer eyJraWQiOiIwcE9oTDBBVXlWSXF1V0w1U29NZTdzcVNhS2FqYzYzV1N5THZYb0ZhWXRNIiwiYWxnIjoiRWREU0EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJVenVtIElEIiwiaWF0IjoxNjk1NTcwMjAzLCJzdWIiOiI4NGU1MTljNS04YTFhLTQ5OTgtOTNkMC01MzFkYjM1ZDk1MTYiLCJhdWQiOlsidXp1bV9hcHBzIiwibWFya2V0L3dlYiJdLCJldmVudHMiOnsib3RwX3Bhc3NlZCI6MTY5NDUyMTMzOX0sImN1c3RvbWVyX2lkIjoiNjAyM2I3N2ItYjA2ZS00MzQyLTg2NjgtZDhlMmY0ZTZjNjAzIiwicGhvbmVfbnVtYmVyIjoiOTk4OTkxMjcxNDA1IiwiZXhwIjoxNjk1NTcyMTIzfQ.LqX02bdL-2aDpmWWldzwK13HJhNnVlBfl98i0KYKbacIMmQcmrZwyCVkG36Eu8hFp5FAJv98Bb10n6swZxlJCw',  # API anahtarınızı buraya ekleyin (eğer gerekiyorsa)\n    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',  # İsteği hangi kullanıcı ajanıyla gönderdiğinizi belirleyin (isteğe bağlı)\n}\n# İstek parametrelerini veya gövdesini ayarlayın (API belgesine göre)\nparams = {\n    \"queryText\": \"asus\" # İhtiyaç duyulan diğer parametreleri ekleyin (isteğe bağlı)\n}\n# HTTP GET veya POST isteği gönderme (API belgesine göre)\ntry:",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "params",
+        "kind": 5,
+        "importPath": "test",
+        "description": "test",
+        "peekOfCode": "params = {\n    \"queryText\": \"asus\" # İhtiyaç duyulan diğer parametreleri ekleyin (isteğe bağlı)\n}\n# HTTP GET veya POST isteği gönderme (API belgesine göre)\ntry:\n    response = requests.get(api_url, params=params, headers=headers)  # veya \"httpx.get\" kullanarak httpx'i kullanabilirsiniz\n    response.raise_for_status()  # İstek başarısız olursa bir hata fırlatır\nexcept requests.exceptions.RequestException as e:\n    print(f'Hata oluştu: {e}')\n    response = None",
+        "detail": "test",
+        "documentation": {}
+    },
+    {
+        "label": "get_data",
+        "kind": 2,
+        "importPath": "test2",
+        "description": "test2",
+        "peekOfCode": "def get_data(url:str):\n    response = requests.get(url)\n    parser_data = BeautifulSoup(response.text, features='html.parser')\n    pprint(parser_data)",
+        "detail": "test2",
+        "documentation": {}
+    }
+]
