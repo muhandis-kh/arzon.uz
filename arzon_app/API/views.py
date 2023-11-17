@@ -27,7 +27,7 @@ from selenium.webdriver.common.service import Service
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--headless")
-# chrome_options.add_argument("--incognito")
+chrome_options.add_argument("--incognito")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-blink-features=AutomationControlled")
@@ -45,7 +45,7 @@ def uzum(encoded_query, allProducts):
 
     browser.get(f"https://uzum.uz/uz/search?query={encoded_query}&needsCorrection=1")
     print(f"https://uzum.uz/uz/search?query={encoded_query}&needsCorrection=1")
-    # print(browser.page_source)
+    print(browser.page_source)
     wait = WebDriverWait(browser, 30)
 
     wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "ui-card")))
@@ -104,8 +104,7 @@ def uzum(encoded_query, allProducts):
         return products
 
     else:
-        return ("Uzumda bunday mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
-    
+        return ("Uzumda bunday mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )   
      
 def zoodmall(encoded_query, zoodmall_api_link, allProducts):
     
