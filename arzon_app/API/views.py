@@ -27,7 +27,7 @@ from selenium.webdriver.common.service import Service
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--headless")
-chrome_options.add_argument("--incognito")
+# chrome_options.add_argument("--incognito")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-blink-features=AutomationControlled")
@@ -394,11 +394,35 @@ class SearchProductView(APIView):
                 result_asaxiy = "ERROR: " + str(e)
                 print(e)
                 
-            result_zoodmall = zoodmall(encoded_query, zoodmall_api_link=zoodmall_api_link, allProducts=allProducts)
-            result_sello = sello(encoded_query, sello_api_link=sello_api_link, allProducts=allProducts)
-            result_olcha = olcha(encoded_query, olcha_api_link=olcha_api_link, allProducts=allProducts)
-            result_texnomart = texnomart(encoded_query, texnomart_api_link=texnomart_api_link, allProducts=allProducts)
-            result_all = get_all_low_price(allProducts=allProducts)
+            try:
+                result_zoodmall = zoodmall(encoded_query, zoodmall_api_link=zoodmall_api_link, allProducts=allProducts)
+            except Exception as e:
+                result_zoodmall = "ERROR: " + str(e)
+                print(e)
+
+            try:
+                result_sello = sello(encoded_query, sello_api_link=sello_api_link, allProducts=allProducts)
+            except Exception as e:
+                result_sello = "ERROR: " + str(e)
+                print(e)
+
+            try:
+                result_olcha = olcha(encoded_query, olcha_api_link=olcha_api_link, allProducts=allProducts)
+            except Exception as e:
+                result_olcha = "ERROR: " + str(e)
+                print(e)
+
+            try:
+                result_texnomart = texnomart(encoded_query, texnomart_api_link=texnomart_api_link, allProducts=allProducts)
+            except Exception as e:
+                result_texnomart = "ERROR: " + str(e)
+                print(e)
+
+            try:
+                result_all = get_all_low_price(allProducts=allProducts)
+            except Exception as e:
+                result_all = "ERROR: " + str(e)
+                print(e)
             
             try:
                 return Response({
