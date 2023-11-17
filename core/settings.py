@@ -33,7 +33,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh', '.onrender.com', '.pythonanywhere.com', 'arzonuz.up.railway.app']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://arzon-uz.onrender.com/'
+    'https://arzon-uz.onrender.com/',
+    'https://arzonuz.up.railway.app/'
 ]
 
 # Application definition
