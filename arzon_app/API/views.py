@@ -26,11 +26,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.service import Service
 
 chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--headless")
 chrome_options.add_argument("--incognito")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+chrome_options.add_argument("--disable-gpu")
 
 browser = webdriver.Chrome(options=chrome_options)
 # chrome_options.binary_location = os.environ.get("/app/.chromedriver/bin/chromedriver")
@@ -44,7 +45,7 @@ def uzum(encoded_query, allProducts):
 
     browser.get(f"https://uzum.uz/uz/search?query={encoded_query}&needsCorrection=1")
     print(f"https://uzum.uz/uz/search?query={encoded_query}&needsCorrection=1")
-    print(browser.page_source)
+    # print(browser.page_source)
     wait = WebDriverWait(browser, 30)
 
     wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "ui-card")))
