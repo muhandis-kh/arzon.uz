@@ -1,1 +1,1 @@
-'./render-start.sh'
+./render-start.sh
