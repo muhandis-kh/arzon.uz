@@ -385,8 +385,15 @@ class SearchProductView(APIView):
             try:
                 result_uzum = uzum(encoded_query=encoded_query, allProducts=allProducts)
             except Exception as e:
+                result_uzum = "ERROR: " + str(e)
                 print(e)
-            result_asaxiy = asaxiy(encoded_query=encoded_query, allProducts=allProducts)
+            
+            try:
+                result_asaxiy = asaxiy(encoded_query=encoded_query, allProducts=allProducts)
+            except Exception as e:
+                result_asaxiy = "ERROR: " + str(e)
+                print(e)
+                
             result_zoodmall = zoodmall(encoded_query, zoodmall_api_link=zoodmall_api_link, allProducts=allProducts)
             result_sello = sello(encoded_query, sello_api_link=sello_api_link, allProducts=allProducts)
             result_olcha = olcha(encoded_query, olcha_api_link=olcha_api_link, allProducts=allProducts)
