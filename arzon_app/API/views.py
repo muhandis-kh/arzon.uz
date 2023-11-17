@@ -32,7 +32,7 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-blink-features=AutomationControlled")
 
-# browser = webdriver.Chrome(options=chrome_options)
+browser = webdriver.Chrome(options=chrome_options)
 # chrome_options.binary_location = os.environ.get("/app/.chromedriver/bin/chromedriver")
 # browser = webdriver.Chrome(executable_path=os.environ.get("/app/.apt/usr/bin/google-chrome"), chrome_options=chrome_options)
 # browser = webdriver.Chrome(ChromeDriverManager().install())
@@ -382,8 +382,11 @@ class SearchProductView(APIView):
         encoded_query = quote(product_name)
         if encoded_query:
 
-            # result_uzum = uzum(encoded_query=encoded_query, allProducts=allProducts)
-            # result_asaxiy = asaxiy(encoded_query=encoded_query, allProducts=allProducts)
+            try:
+                result_uzum = uzum(encoded_query=encoded_query, allProducts=allProducts)
+            except Exception as e:
+                print(e)
+            result_asaxiy = asaxiy(encoded_query=encoded_query, allProducts=allProducts)
             result_zoodmall = zoodmall(encoded_query, zoodmall_api_link=zoodmall_api_link, allProducts=allProducts)
             result_sello = sello(encoded_query, sello_api_link=sello_api_link, allProducts=allProducts)
             result_olcha = olcha(encoded_query, olcha_api_link=olcha_api_link, allProducts=allProducts)
@@ -393,8 +396,8 @@ class SearchProductView(APIView):
             try:
                 return Response({
                 "products": {
-                    # "uzum": result_uzum,
-                    # "asaxiy": result_asaxiy,
+                    "uzum": result_uzum,
+                    "asaxiy": result_asaxiy,
                     "zoodmall": result_zoodmall,
                     "sello": result_sello,
                     "olcha": result_olcha,
