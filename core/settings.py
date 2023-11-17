@@ -30,7 +30,7 @@ SECRET_KEY = django_secret_key
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh', '.onrender.com', '.pythonanywhere.com', 'railway.app']
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app', '.now.sh', '.onrender.com', '.pythonanywhere.com', 'arzonuz.up.railway.app']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://arzon-uz.onrender.com/'
