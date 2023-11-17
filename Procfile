@@ -1,1 +1,1 @@
-web: gunicorn 'core.wsgi' --timeout 99999999
+'./render-start.sh'
