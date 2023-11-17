@@ -47,7 +47,7 @@ def uzum(encoded_query, allProducts):
     print(browser.page_source)
     wait = WebDriverWait(browser, 30)
 
-    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "card-info-block")))
+    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "ui-card")))
 
     uzum_page = browser.page_source
     uzum_soup = BeautifulSoup(uzum_page, "lxml")
@@ -105,7 +105,6 @@ def uzum(encoded_query, allProducts):
     else:
         return ("Uzumda bunday mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
     
-    print('passed')
      
 def zoodmall(encoded_query, zoodmall_api_link, allProducts):
     
