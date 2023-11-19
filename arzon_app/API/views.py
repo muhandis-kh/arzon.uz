@@ -32,7 +32,7 @@ chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-blink-features=AutomationControlled")
 chrome_options.add_argument("--disable-gpu")
-chrome_options.add_argument("user-agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
+# chrome_options.add_argument("user-agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
 
 browser = webdriver.Chrome(options=chrome_options)
 # chrome_options.binary_location = os.environ.get("/app/.chromedriver/bin/chromedriver")
@@ -42,8 +42,8 @@ browser = webdriver.Chrome(options=chrome_options)
 
   
 def uzum(encoded_query, allProducts):
-
-
+    cookie_string = "_gcl_au=1.1.1126409477.1692954200; _ym_uid=1692954201826510623; _ym_d=1692954201; tmr_lvid=dc19ff24c244eaeb0b692aa75568caa2; tmr_lvidTS=1692954201019; _ga_RHGS2343RN=GS1.1.1693758930.1.0.1693758950.40.0.0; _gac_UA-235641814-1=1.1693759116.CjwKCAjw3dCnBhBCEiwAVvLcu9OaizA8Hor87bxHnSpPWHWXXIxRXvf_qo4pKroEfsJZRrQv7Uq3UxoCK0sQAvD_BwE; _gcl_aw=GCL.1693759116.CjwKCAjw3dCnBhBCEiwAVvLcu9OaizA8Hor87bxHnSpPWHWXXIxRXvf_qo4pKroEfsJZRrQv7Uq3UxoCK0sQAvD_BwE; _gid=GA1.2.805844873.1700220645; _ym_isad=1; uzum-customers=2b752e6686aab24cef51c33c5267da31|480c8e27df8fb2794d4d4e35bad9c66c; _ym_visorc=b; access_token=eyJraWQiOiIwcE9oTDBBVXlWSXF1V0w1U29NZTdzcVNhS2FqYzYzV1N5THZYb0ZhWXRNIiwiYWxnIjoiRWREU0EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJVenVtIElEIiwiaWF0IjoxNzAwMjM4MTgyLCJzdWIiOiI4NGU1MTljNS04YTFhLTQ5OTgtOTNkMC01MzFkYjM1ZDk1MTYiLCJhdWQiOlsidXp1bV9hcHBzIiwibWFya2V0L3dlYiJdLCJldmVudHMiOnt9LCJleHAiOjE3MDAyMzg5MDJ9.naqKhZgWuLFKyQTkS0SI_8UY1TogtkUE2YaIVRK8HtxCgXkK6W0KLmT1rY3_cRVFVC6_ZcFhaEuQ-cjcei3WAw; _gat_UA-235641814-1=1; _ga=GA1.2.1521422407.1692954200; tmr_detect=1%7C1700238196332; _ga_7KCSSWWYYD=GS1.1.1700236624.36.1.1700238196.40.0.0; cf_clearance=Dqt4KEa_wyV8bLaEcNo06._93UXGHiNE1oCbqpSl_G8-1700238200-0-1-7573300d.ec035a4e.22726fed-0.2.1700238200; _ga_EZ8RKY9S93=GS1.2.1700236639.31.1.1700238197.0.0.0"
+    browser.add_cookie({'name': 'cookie_name', 'value': cookie_string, 'domain': 'uzum.uz'})
     browser.get(f"https://uzum.uz/uz/search?query={encoded_query}&needsCorrection=1")
     print(f"https://uzum.uz/uz/search?query={encoded_query}&needsCorrection=1")
     print(browser.page_source)
