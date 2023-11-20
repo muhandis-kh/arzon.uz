@@ -383,11 +383,11 @@ class SearchProductView(APIView):
         encoded_query = quote(product_name)
         if encoded_query:
 
-            try:
-                result_uzum = uzum(encoded_query=encoded_query, allProducts=allProducts)
-            except Exception as e:
-                result_uzum = "ERROR: " + str(e)
-                print(e)
+            # try:
+            #     result_uzum = uzum(encoded_query=encoded_query, allProducts=allProducts)
+            # except Exception as e:
+            #     result_uzum = "ERROR: " + str(e)
+            #     print(e)
             
             try:
                 result_asaxiy = asaxiy(encoded_query=encoded_query, allProducts=allProducts)
@@ -428,7 +428,7 @@ class SearchProductView(APIView):
             try:
                 return Response({
                 "products": {
-                    "uzum": result_uzum,
+                    # "uzum": result_uzum,
                     "asaxiy": result_asaxiy,
                     "zoodmall": result_zoodmall,
                     "sello": result_sello,
