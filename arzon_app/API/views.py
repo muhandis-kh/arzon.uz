@@ -170,40 +170,43 @@ def asaxiy(encoded_query, allProducts):
         
         products = []
         
-        
-        for product in asaxiy_products:
+        product_check = asaxiy_soup.find("div", attrs={"class":"row custom-gutter mb-40"})
+        if product_check:
+            for product in asaxiy_products:
 
-            asaxiy_pr_name = product.find("span", attrs={"class":"product__item__info-title"}).text.strip()
-            asaxiy_pr_link = product.find("a").get('href')
-            asaxiy_pr_image = product.find("img", attrs={"class":"img-fluid lazyload"}).get('data-src')
-            asaxiy_pr_price = product.find("span",attrs={"class":"product__item-price"}).text.strip()[0:-4].replace(' ', '')
-               
-            products.append(
-                {
-                    'name': asaxiy_pr_name,
-                    'price': int(asaxiy_pr_price),
-                    'link': "https://www.asaxiy.uz"+asaxiy_pr_link,
-                    'image_link': asaxiy_pr_image
-                }
-            )
+                asaxiy_pr_name = product.find("span", attrs={"class":"product__item__info-title"}).text.strip()
+                asaxiy_pr_link = product.find("a").get('href')
+                asaxiy_pr_image = product.find("img", attrs={"class":"img-fluid lazyload"}).get('data-src')
+                asaxiy_pr_price = product.find("span",attrs={"class":"product__item-price"}).text.strip()[0:-4].replace(' ', '')
+                
+                products.append(
+                    {
+                        'name': asaxiy_pr_name,
+                        'price': int(asaxiy_pr_price),
+                        'link': "https://www.asaxiy.uz"+asaxiy_pr_link,
+                        'image_link': asaxiy_pr_image
+                    }
+                )
 
-            allProducts.append(
-                {
-                    'name': asaxiy_pr_name,
-                    'price': int(asaxiy_pr_price),
-                    'link': "https://www.asaxiy.uz"+asaxiy_pr_link,
-                    'image_link': asaxiy_pr_image,
-                    'market_place': "asaxiy.uz"
-                }
-            )
-        
-        def get_price(products):
-            price_str = products.get('price', '0')
-            return float(price_str)
-        
-        products.sort(key=get_price, reverse=False)
-        
-        return products
+                allProducts.append(
+                    {
+                        'name': asaxiy_pr_name,
+                        'price': int(asaxiy_pr_price),
+                        'link': "https://www.asaxiy.uz"+asaxiy_pr_link,
+                        'image_link': asaxiy_pr_image,
+                        'market_place': "asaxiy.uz"
+                    }
+                )
+            
+            def get_price(products):
+                price_str = products.get('price', '0')
+                return float(price_str)
+            
+            products.sort(key=get_price, reverse=False)
+            
+            return products
+        else:
+            return ("Asaxiyda mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
     else:
         print(f'Asaxiy mahsulot topilmadi, {response.status_code}')
 
