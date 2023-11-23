@@ -333,28 +333,29 @@ def texnomart(encoded_query, texnomart_api_link, allProducts):
                     price = product['loan_price']
                 
                 low_price = get_all_low_price(allProducts=allProducts)
-                
-                if price < low_price['products']['all'][0]['price']:
-                    pass
-                else:
-                    API.append(
-                        {
-                            'name': product['name'],
-                            'price': price,
-                            'link': f"https://texnomart.uz/product/detail/{product['id']}",
-                            'image_link': product['image']
-                        }
-                    )
-                    
-                    allProducts.append(
-                        {
-                            'name': product['name'],
-                            'price': price,
-                            'link': f"https://texnomart.uz/product/detail/{product['id']}",
-                            'image_link': product['image'],
-                            'market_place': "texnomart.uz"
-                        }
-                    )
+                print(low_price)
+                if low_price:
+                    if price < low_price[0]['price']:
+                        pass
+                    else:
+                        API.append(
+                            {
+                                'name': product['name'],
+                                'price': price,
+                                'link': f"https://texnomart.uz/product/detail/{product['id']}",
+                                'image_link': product['image']
+                            }
+                        )
+                        
+                        allProducts.append(
+                            {
+                                'name': product['name'],
+                                'price': price,
+                                'link': f"https://texnomart.uz/product/detail/{product['id']}",
+                                'image_link': product['image'],
+                                'market_place': "texnomart.uz"
+                            }
+                        )
             
             def get_price(API):
                 price = API.get('price', '0')
