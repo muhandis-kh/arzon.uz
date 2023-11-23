@@ -18,27 +18,19 @@ from urllib.parse import quote
 from .renderers import UserRenderer
 from .serializers import UserRegistrationSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAdminUserOrReadOnly
 from .throttles import CustomBearerTokenRateThrottle
-import os
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.service import Service
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--incognito")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-chrome_options.add_argument("--disable-gpu")
-# chrome_options.add_argument("user-agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36")
 
-browser = webdriver.Chrome(options=chrome_options)
-# chrome_options.binary_location = os.environ.get("/app/.chromedriver/bin/chromedriver")
-# browser = webdriver.Chrome(executable_path=os.environ.get("/app/.apt/usr/bin/google-chrome"), chrome_options=chrome_options)
-# browser = webdriver.Chrome(ChromeDriverManager().install())
-# browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+# chrome_options = webdriver.ChromeOptions()
+# chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--incognito")
+# chrome_options.add_argument("--disable-dev-shm-usage")
+# chrome_options.add_argument("--no-sandbox")
+# chrome_options.add_argument("--disable-blink-features=AutomationControlled")
+# chrome_options.add_argument("--disable-gpu")
+
+# browser = webdriver.Chrome(options=chrome_options)
 
   
 def uzum(encoded_query, allProducts):
@@ -159,21 +151,13 @@ def zoodmall(encoded_query, zoodmall_api_link, allProducts):
         print("Status code", response.status_code)
                
 def asaxiy(encoded_query, allProducts):
-
-
-
-    browser.get(f"https://asaxiy.uz/uz/product/sort=rate-high?key={encoded_query}")
-    wait = WebDriverWait(browser, 30)
-
-    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "product__item.d-flex.flex-column.justify-content-between ")))
-
-    asaxiy_page = browser.page_source
-    asaxiy_soup = BeautifulSoup(asaxiy_page, "lxml")
     
-    product_check = asaxiy_soup.find("div", attrs={"class":"row custom-gutter mb-40"})
-    if product_check:
-        
-    
+    url = f'https://asaxiy.uz/uz/product/sort=rate-high?key={encoded_query}'
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        html_content = response.content
+        asaxiy_soup = BeautifulSoup(html_content, 'html.parser')
         asaxiy_products = asaxiy_soup.find_all("div", attrs={"class":"product__item d-flex flex-column justify-content-between"})
         asaxiy_products = asaxiy_products[0:5]
         
@@ -184,7 +168,7 @@ def asaxiy(encoded_query, allProducts):
 
             asaxiy_pr_name = product.find("span", attrs={"class":"product__item__info-title"}).text.strip()
             asaxiy_pr_link = product.find("a").get('href')
-            asaxiy_pr_image = product.find("img", attrs={"class":"img-fluid lazyload"}).get('src')
+            asaxiy_pr_image = product.find("img", attrs={"class":"img-fluid lazyload"}).get('data-src')
             asaxiy_pr_price = product.find("span",attrs={"class":"product__item-price"}).text.strip()[0:-4].replace(' ', '')
                
             products.append(
@@ -213,12 +197,10 @@ def asaxiy(encoded_query, allProducts):
         products.sort(key=get_price, reverse=False)
         
         return products
-
     else:
-        return ("Asaxiy mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
+        print(f'Asaxiy mahsulot topilmadi, {response.status_code}')
+
     
-    print(passed)
- 
 def sello(encoded_query, sello_api_link, allProducts):
     
     headers = {
