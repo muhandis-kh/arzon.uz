@@ -31,8 +31,15 @@ from .throttles import CustomBearerTokenRateThrottle
 # chrome_options.add_argument("--disable-gpu")
 
 # browser = webdriver.Chrome(options=chrome_options)
+def get_all_low_price(allProducts):
+    def get_price(allProducts):
+        price = allProducts.get('price', '0')
+        return float(price)
 
-  
+    allProducts.sort(key=get_price, reverse=False)
+    return allProducts
+
+
 def uzum(encoded_query, allProducts):
     cookie_string ="_gcl_au=1.1.1126409477.1692954200; _ym_uid=1692954201826510623; _ym_d=1692954201; tmr_lvid=dc19ff24c244eaeb0b692aa75568caa2; tmr_lvidTS=1692954201019; _ga_RHGS2343RN=GS1.1.1693758930.1.0.1693758950.40.0.0; _gac_UA-235641814-1=1.1693759116.CjwKCAjw3dCnBhBCEiwAVvLcu9OaizA8Hor87bxHnSpPWHWXXIxRXvf_qo4pKroEfsJZRrQv7Uq3UxoCK0sQAvD_BwE; _gcl_aw=GCL.1693759116.CjwKCAjw3dCnBhBCEiwAVvLcu9OaizA8Hor87bxHnSpPWHWXXIxRXvf_qo4pKroEfsJZRrQv7Uq3UxoCK0sQAvD_BwE; uzum-customers=2b752e6686aab24cef51c33c5267da31|480c8e27df8fb2794d4d4e35bad9c66c; cf_clearance=5ynHMyT2waEd8Xf0v2zlP0Pm9fnc1hU95TWudLo8fXM-1700238205-0-1-7573300d.ec035a4e.22726fed-0.2.1700238205; access_token=eyJraWQiOiIwcE9oTDBBVXlWSXF1V0w1U29NZTdzcVNhS2FqYzYzV1N5THZYb0ZhWXRNIiwiYWxnIjoiRWREU0EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJVenVtIElEIiwiaWF0IjoxNzAwNDAyMzcwLCJzdWIiOiI4NGU1MTljNS04YTFhLTQ5OTgtOTNkMC01MzFkYjM1ZDk1MTYiLCJhdWQiOlsidXp1bV9hcHBzIiwibWFya2V0L3dlYiJdLCJldmVudHMiOnt9LCJleHAiOjE3MDA0MDMwOTB9.WHQUPveqtUjt3HNHinpUQYrP_LkykVykJRW2q-iq0Aa-TmB6W6aWgcgLAisjStaMAdrA1NYFenw9dpkGQwgOCg; _gid=GA1.2.136165838.1700402527; _ga=GA1.1.1521422407.1692954200; _ym_isad=1; _ym_visorc=b; tmr_detect=0%7C1700402530475; _ga_EZ8RKY9S93=GS1.2.1700402530.32.0.1700402530.0.0.0; _ga_7KCSSWWYYD=GS1.1.1700402379.38.1.1700402532.34.0.0"
     # cookie_string = "_gcl_au=1.1.1126409477.1692954200; _ym_uid=1692954201826510623; _ym_d=1692954201; tmr_lvid=dc19ff24c244eaeb0b692aa75568caa2; tmr_lvidTS=1692954201019; _ga_RHGS2343RN=GS1.1.1693758930.1.0.1693758950.40.0.0; _gac_UA-235641814-1=1.1693759116.CjwKCAjw3dCnBhBCEiwAVvLcu9OaizA8Hor87bxHnSpPWHWXXIxRXvf_qo4pKroEfsJZRrQv7Uq3UxoCK0sQAvD_BwE; _gcl_aw=GCL.1693759116.CjwKCAjw3dCnBhBCEiwAVvLcu9OaizA8Hor87bxHnSpPWHWXXIxRXvf_qo4pKroEfsJZRrQv7Uq3UxoCK0sQAvD_BwE; _gid=GA1.2.805844873.1700220645; _ym_isad=1; uzum-customers=2b752e6686aab24cef51c33c5267da31|480c8e27df8fb2794d4d4e35bad9c66c; _ym_visorc=b; access_token=eyJraWQiOiIwcE9oTDBBVXlWSXF1V0w1U29NZTdzcVNhS2FqYzYzV1N5THZYb0ZhWXRNIiwiYWxnIjoiRWREU0EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJVenVtIElEIiwiaWF0IjoxNzAwMjM4MTgyLCJzdWIiOiI4NGU1MTljNS04YTFhLTQ5OTgtOTNkMC01MzFkYjM1ZDk1MTYiLCJhdWQiOlsidXp1bV9hcHBzIiwibWFya2V0L3dlYiJdLCJldmVudHMiOnt9LCJleHAiOjE3MDAyMzg5MDJ9.naqKhZgWuLFKyQTkS0SI_8UY1TogtkUE2YaIVRK8HtxCgXkK6W0KLmT1rY3_cRVFVC6_ZcFhaEuQ-cjcei3WAw; _gat_UA-235641814-1=1; _ga=GA1.2.1521422407.1692954200; tmr_detect=1%7C1700238196332; _ga_7KCSSWWYYD=GS1.1.1700236624.36.1.1700238196.40.0.0; cf_clearance=Dqt4KEa_wyV8bLaEcNo06._93UXGHiNE1oCbqpSl_G8-1700238200-0-1-7573300d.ec035a4e.22726fed-0.2.1700238200; _ga_EZ8RKY9S93=GS1.2.1700236639.31.1.1700238197.0.0.0"
@@ -324,24 +331,30 @@ def texnomart(encoded_query, texnomart_api_link, allProducts):
                     price = product['sale_price']
                 else:
                     price = product['loan_price']
-                API.append(
-                    {
-                        'name': product['name'],
-                        'price': price,
-                        'link': f"https://texnomart.uz/product/detail/{product['id']}",
-                        'image_link': product['image']
-                    }
-                )
-
-                allProducts.append(
-                    {
-                        'name': product['name'],
-                        'price': price,
-                        'link': f"https://texnomart.uz/product/detail/{product['id']}",
-                        'image_link': product['image'],
-                        'market_place': "texnomart.uz"
-                    }
-                )
+                
+                low_price = get_all_low_price(allProducts=allProducts)
+                
+                if price < low_price['products']['all'][0]['price']:
+                    pass
+                else:
+                    API.append(
+                        {
+                            'name': product['name'],
+                            'price': price,
+                            'link': f"https://texnomart.uz/product/detail/{product['id']}",
+                            'image_link': product['image']
+                        }
+                    )
+                    
+                    allProducts.append(
+                        {
+                            'name': product['name'],
+                            'price': price,
+                            'link': f"https://texnomart.uz/product/detail/{product['id']}",
+                            'image_link': product['image'],
+                            'market_place': "texnomart.uz"
+                        }
+                    )
             
             def get_price(API):
                 price = API.get('price', '0')
@@ -354,13 +367,7 @@ def texnomart(encoded_query, texnomart_api_link, allProducts):
     else:
         return ("Status code:", response.status_code)
 
-def get_all_low_price(allProducts):
-    def get_price(allProducts):
-        price = allProducts.get('price', '0')
-        return float(price)
 
-    allProducts.sort(key=get_price, reverse=False)
-    return allProducts
 
 class SearchProductView(APIView):
     permission_classes = [IsAdminUserOrReadOnly]
