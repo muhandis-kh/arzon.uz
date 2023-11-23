@@ -91,7 +91,8 @@ def uzum(encoded_query, allProducts):
                     'name': uzum_pr_name,
                     'price': int(uzum_pr_price),
                     'link': "https://uzum.uz"+uzum_pr_link,
-                    'image_link': uzum_pr_image
+                    'image_link': uzum_pr_image,
+                    'market_place': "uzum.uz"
                 }
             )
         
@@ -141,7 +142,8 @@ def zoodmall(encoded_query, zoodmall_api_link, allProducts):
                         'name': product['name'],
                         'price': product['localPrice'],
                         'link': f"https://www.zoodmall.uz/product/{product['productId']}/",
-                        'image_link': product['imgUrl']
+                        'image_link': product['imgUrl'],
+                        'market_place': "zoodmall.uz"
                     }
                 )
             
@@ -199,7 +201,8 @@ def asaxiy(encoded_query, allProducts):
                     'name': asaxiy_pr_name,
                     'price': int(asaxiy_pr_price),
                     'link': "https://www.asaxiy.uz"+asaxiy_pr_link,
-                    'image_link': asaxiy_pr_image
+                    'image_link': asaxiy_pr_image,
+                    'market_place': "asaxiy.uz"
                 }
             )
         
@@ -255,7 +258,8 @@ def sello(encoded_query, sello_api_link, allProducts):
                         'name': product['name'],
                         'price': price,
                         'link': f"https://sello.uz/uz/product/{product['slug']}/",
-                        'image_link': f"https://static.sello.uz/unsafe/x500/https://static.sello.uz{product['imageURL']}"
+                        'image_link': f"https://static.sello.uz/unsafe/x500/https://static.sello.uz{product['imageURL']}",
+                        'market_place': "sello.uz"
                     }
                 )
             
@@ -303,7 +307,8 @@ def olcha(encoded_query, olcha_api_link, allProducts):
                         'name': product['name_oz'],
                         'price': price,
                         'link': f"https://olcha.uz/oz/product/view/{product['alias']}/",
-                        'image_link': product['main_image']
+                        'image_link': product['main_image'],
+                        'market_place': "olcha.uz"
                     }
                 )
             
@@ -351,7 +356,8 @@ def texnomart(encoded_query, texnomart_api_link, allProducts):
                         'name': product['name'],
                         'price': price,
                         'link': f"https://texnomart.uz/product/detail/{product['id']}",
-                        'image_link': product['image']
+                        'image_link': product['image'],
+                        'market_place': "texnomart.uz"
                     }
                 )
             
