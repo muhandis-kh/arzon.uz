@@ -106,6 +106,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #         'PORT': data.DATABASE_PORT,
 #     }
 # }
+
 DATABASES = {
     'default': dj_database_url.parse(data.DATABASE_URL)
 }
