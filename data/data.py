@@ -14,6 +14,7 @@ bot_token = os.getenv('bot_token')
 secret_key = os.getenv('secret_key')
 
 KEY = os.getenv('key')
+KEY_VERCEL = os.getenv('key_vercel')
 
 django_secret_key = os.getenv('django_secret_key')
 

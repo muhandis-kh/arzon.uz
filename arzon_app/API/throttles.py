@@ -1,5 +1,5 @@
 from rest_framework.throttling import UserRateThrottle
-from data.data import KEY
+from data.data import KEY, KEY_VERCEL
 
 class CustomBearerTokenRateThrottle(UserRateThrottle):
     rate = '10/day'  
@@ -16,7 +16,7 @@ class CustomBearerTokenRateThrottle(UserRateThrottle):
         return super().allow_request(request, view)
 
     def validate_token(self, bearer_token):
-        if bearer_token == KEY:
+        if bearer_token == KEY or bearer_token == KEY_VERCEL:
             return True
 
         return False
