@@ -1,6 +1,7 @@
 from rest_framework.throttling import UserRateThrottle
 from data.data import KEY, KEY_VERCEL
 
+# Belgilangan Baerer code bilan kelgan so;rovlar uchun throttle ishlatmasligini uchun Custom Throttle yozildi
 class CustomBearerTokenRateThrottle(UserRateThrottle):
     rate = '10/day'  
 

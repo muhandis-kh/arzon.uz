@@ -31,6 +31,8 @@ from .throttles import CustomBearerTokenRateThrottle
 # chrome_options.add_argument("--disable-gpu")
 
 # browser = webdriver.Chrome(options=chrome_options)
+
+# Barcha mahsulotlar ichidan narxi bo'yicha o'sib borish tartibida saralash uchun filter
 def get_all_low_price(allProducts):
     def get_price(allProducts):
         price = allProducts.get('price', '0')
@@ -111,6 +113,8 @@ def uzum(encoded_query, allProducts):
 def zoodmall(encoded_query, zoodmall_api_link, allProducts):
     
     url = f"{zoodmall_api_link}{encoded_query}&page=1&sort=1"
+    
+    # API headers sifatida x-lang, x-marketcode larni kutgani uchun qo'shildi
     headers = {
         "x-lang": "uz",
         "x-marketcode": "UZ" 
@@ -335,8 +339,9 @@ def texnomart(encoded_query, texnomart_api_link, allProducts):
                 else:
                     price = product['loan_price']
                 
+                # Mahsulotlarni saralashda texnomart qidiruv funksiyasi so'rovga taaluqli bo'lmagan natijalarni ko'rsatgani uchun barcha mahsulotlar ichidan eng arzonidan arzonroq bo'lgan mahsulotlar ro'yhatga qo'shilmasligi uchun
                 low_price = get_all_low_price(allProducts=allProducts)
-                print(low_price)
+
                 if low_price:
                     if price < low_price[0]['price']:
                         pass
@@ -382,6 +387,7 @@ class SearchProductView(APIView):
         encoded_query = quote(product_name)
         if encoded_query:
 
+            # uzum.uz uchun selenium bilan qilingan funksiya serverda xato bergani uchun o'chirib qo'yildi
             # try:
             #     result_uzum = uzum(encoded_query=encoded_query, allProducts=allProducts)
             # except Exception as e:
