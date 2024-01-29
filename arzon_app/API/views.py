@@ -21,10 +21,11 @@ from .serializers import UserRegistrationSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from .permissions import IsAdminUserOrReadOnly
 from .throttles import CustomBearerTokenRateThrottle
-
 from .config import json_data, list_headers
 from pprint import pprint
 import json
+import aiohttp
+import asyncio
 
 # chrome_options = webdriver.ChromeOptions()
 # chrome_options.add_argument("--headless")
@@ -57,13 +58,19 @@ def uzum(encoded_query, allProducts):
         json=json_data(
             encoded_query,
             offset)).json()
+    # async with aiohttp.ClientSession() as session:
+    #     response = await session.post(
+    #         'https://graphql.uzum.uz/',
+    #         headers=list_headers,
+    #         json=json_data(encoded_query, offset)
+    #     )
+    #     data = await response.json()
     try:
         uzum_page = response.get('data').get('makeSearch')
     except:
         uzum_page = False
-        
     if uzum_page:
-            
+        
         data = uzum_page['items']
         searching_products = []
 
@@ -113,128 +120,118 @@ def uzum(encoded_query, allProducts):
             return products
         else:
             return ("Uzumda bunday mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )   
+
     else:
         return ("Uzumda bunday mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )   
-
      
-def zoodmall(encoded_query, zoodmall_api_link, allProducts):
-    
+async def zoodmall_async(encoded_query, zoodmall_api_link, allProducts):
     url = f"{zoodmall_api_link}{encoded_query}&page=1&sort=1"
-    
-    # API headers sifatida x-lang, x-marketcode larni kutgani uchun qo'shildi
+
     headers = {
         "x-lang": "uz",
-        "x-marketcode": "UZ" 
+        "x-marketcode": "UZ"
     }
-    response = requests.get(url, headers=headers)
 
-    if response.status_code == 200:
-        
-    
-        data = response.json()
-        products = data['marketList']
-        searching_products = []
-        for product in products:
-            if unquote(encoded_query) in product['name'].lower():
-                searching_products.append(product)
-            else:
-                pass
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, headers=headers) as response:
+            if response.status == 200:
+                data = await response.json()
+                products = data['marketList']
+                searching_products = [product for product in products if unquote(encoded_query) in product['name'].lower()]
 
-        API = []
-        
-        if products:
-            searching_products = searching_products if searching_products else products
-            for product in searching_products[0:5]:
-                if product['localCrossedPrice']:
-                    old_price = product['localCrossedPrice'] if product['localCrossedPrice'] > product['localPrice'] else None
+                API = []
+
+                if products:
+                    searching_products = searching_products if searching_products else products
+                    for product in searching_products[0:5]:
+                        if product['localCrossedPrice']:
+                            old_price = product['localCrossedPrice'] if product['localCrossedPrice'] > product['localPrice'] else None
+                        else:
+                            old_price = None
+
+                        API.append(
+                            {
+                                'name': product['name'],
+                                'old_price': old_price,
+                                'price': product['localPrice'],
+                                'link': f"https://www.zoodmall.uz/product/{product['productId']}/",
+                                'image_link': product['imgUrl']
+                            }
+                        )
+
+                        allProducts.append(
+                            {
+                                'name': product['name'],
+                                'old_price': old_price,
+                                'price': product['localPrice'],
+                                'link': f"https://www.zoodmall.uz/product/{product['productId']}/",
+                                'image_link': product['imgUrl'],
+                                'market_place': "zoodmall.uz"
+                            }
+                        )
+
+                    def get_price(API):
+                        price = API.get('price', '0')
+                        return float(price)
+
+                    API.sort(key=get_price, reverse=False)
+                    return API
                 else:
-                    old_price = None
-                
-                API.append(
-                    {
-                        'name': product['name'],
-                        'old_price': old_price,
-                        'price': product['localPrice'],
-                        'link': f"https://www.zoodmall.uz/product/{product['productId']}/",
-                        'image_link': product['imgUrl']
-                    }
-                )
-                
-                allProducts.append(
-                    {
-                        'name': product['name'],
-                        'old_price': old_price,
-                        'price': product['localPrice'],
-                        'link': f"https://www.zoodmall.uz/product/{product['productId']}/",
-                        'image_link': product['imgUrl'],
-                        'market_place': "zoodmall.uz"
-                    }
-                )
-            
-            def get_price(API):
-                price = API.get('price', '0')
-                return float(price)
-            
-            API.sort(key=get_price, reverse=False)
-            return API
-        else:
-            return ("Zoodmallda bunday mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )   
-    else:
-        print("Status code", response.status_code)
-               
-def asaxiy(encoded_query, allProducts):
-    user_agent_list = [
-    #Chrome
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
-    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
-    'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
-    #Firefox
-    'Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)',
-    'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko',
-    'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)',
-    'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko',
-    'Mozilla/5.0 (Windows NT 6.2; WOW64; Trident/7.0; rv:11.0) like Gecko',
-    'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko',
-    'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0; Trident/5.0)',
-    'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko',
-    'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)',
-    'Mozilla/5.0 (Windows NT 6.1; Win64; x64; Trident/7.0; rv:11.0) like Gecko',
-    'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)',
-    'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)',
-    'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)'
-    ]
-    url = f'http://asaxiy.uz/uz/product/sort=rate-high?key={encoded_query}'   
+                    return ("Zoodmallda bunday mahsulot topilmadi,", status.HTTP_204_NO_CONTENT)
+            else:
+                print("Status code", response.status)
+   
+async def fetch_asaxiy(session, url):
+    async with session.get(url) as response:
+        return await response.text()
 
-    proxy = {
-        "http": "http://103.242.104.101:8080",
-        "https": "https://103.242.104.101:8080"
-    }
+async def asaxiy_async(encoded_query, allProducts):
+    user_agent_list = [
+        #Chrome
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+        #Firefox
+        'Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)',
+        'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko',
+        'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)',
+        'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko',
+        'Mozilla/5.0 (Windows NT 6.2; WOW64; Trident/7.0; rv:11.0) like Gecko',
+        'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko',
+        'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0; Trident/5.0)',
+        'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko',
+        'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)',
+        'Mozilla/5.0 (Windows NT 6.1; Win64; x64; Trident/7.0; rv:11.0) like Gecko',
+        'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)',
+        'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)',
+        'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)'
+        ]
+
+    url = f'http://asaxiy.uz/uz/product/sort=rate-high?key={encoded_query}'
 
     headers = {
         "User-Agent": random.choice(user_agent_list)
     }
-    
-    response = requests.get(url)
-     
 
-    if response.status_code == 200:
-        html_content = response.content
-        asaxiy_soup = BeautifulSoup(html_content, 'lxml')
-        asaxiy_products = asaxiy_soup.find_all("div", attrs={"class":"product__item d-flex flex-column justify-content-between"})
-        asaxiy_products = asaxiy_products[0:5]
-        
-        products = []
-        
-        product_check = asaxiy_soup.find("div", attrs={"class":"row custom-gutter mb-40"})
-        if product_check:
-            for product in asaxiy_products:
+    async with aiohttp.ClientSession(headers=headers) as session:
+        html_content = await fetch_asaxiy(session, url)
+
+        if html_content:
+            asaxiy_soup = BeautifulSoup(html_content, 'lxml')
+            asaxiy_products = asaxiy_soup.find_all("div", attrs={"class": "product__item d-flex flex-column justify-content-between"})
+            asaxiy_products = asaxiy_products
+
+            products = []
+
+            product_check = asaxiy_soup.find("div", attrs={"class": "row custom-gutter mb-40"})
+            if product_check:
                 searching_products = []
 
                 for product in asaxiy_products:
@@ -290,149 +287,159 @@ def asaxiy(encoded_query, allProducts):
                 else:
                     return ("Asaxiyda mahsulot topilmadi,", status.HTTP_204_NO_CONTENT)
                     
-    else:
-        print(f'Asaxiy mahsulot topilmadi, {response.status_code}')
-   
-def sello(encoded_query, sello_api_link, allProducts):
-    
+            else:
+                return ("Asaxiyda mahsulot topilmadi,", status.HTTP_204_NO_CONTENT)
+        else:
+            print('Asaxiy mahsulot topilmadi, HTTP istek hatası')
+
+async def fetch_sello(session, url):
+    async with session.get(url) as response:
+        return await response.text()
+
+async def sello_async(encoded_query, sello_api_link, allProducts):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
-
     }
-    response = requests.get(f"{sello_api_link}{encoded_query}&page=1&perPage=30&sortBy=name_desc", headers=headers)
-    
-    
-    if response.status_code == 200:
-        
-    
-        data = response.json()  
-        products = data['hits'][0:5]
-        API = []
-        
-        if products:
-            for product in products:
 
-                if product['discounted_price']:
-                    sello_pr_price = product['discounted_price']
-                else:
-                    sello_pr_price = product['price']
-                API.append(
-                    {
-                        'name': product['name'],
-                        'old_price': product['price'] if sello_pr_price < product['price'] else None,
-                        'price': sello_pr_price, 
-                        'link': f"https://sello.uz/uz/product/{product['slug']}/",
-                        'image_link': f"https://static.sello.uz/unsafe/x500/https://static.sello.uz{product['imageURL']}"
-                    }
-                )
-                
-                allProducts.append(
-                    {
-                        'name': product['name'],
-                        'old_price': product['price'] if sello_pr_price < product['price'] else None,
-                        'price': sello_pr_price,
-                        'link': f"https://sello.uz/uz/product/{product['slug']}/",
-                        'image_link': f"https://static.sello.uz/unsafe/x500/https://static.sello.uz{product['imageURL']}",
-                        'market_place': "sello.uz"
-                    }
-                )
-            
-            def get_price(API):
-                price = API.get('price', '0')
-                return float(price)
-            
-            API.sort(key=get_price, reverse=False)
-            return API
+    async with aiohttp.ClientSession(headers=headers) as session:
+        url = f"{sello_api_link}{encoded_query}&page=1&perPage=30&sortBy=name_desc"
+        html_content = await fetch_sello(session, url)
+
+        if html_content:
+            data = json.loads(html_content) 
+            products = data['hits'][0:5]
+            API = []
+
+            if products:
+                for product in products:
+                    if product['discounted_price']:
+                        sello_pr_price = product['discounted_price']
+                    else:
+                        sello_pr_price = product['price']
+
+                    API.append(
+                        {
+                            'name': product['name'],
+                            'old_price': product['price'] if sello_pr_price < product['price'] else None,
+                            'price': sello_pr_price, 
+                            'link': f"https://sello.uz/uz/product/{product['slug']}/",
+                            'image_link': f"https://static.sello.uz/unsafe/x500/https://static.sello.uz{product['imageURL']}"
+                        }
+                    )
+
+                    allProducts.append(
+                        {
+                            'name': product['name'],
+                            'old_price': product['price'] if sello_pr_price < product['price'] else None,
+                            'price': sello_pr_price,
+                            'link': f"https://sello.uz/uz/product/{product['slug']}/",
+                            'image_link': f"https://static.sello.uz/unsafe/x500/https://static.sello.uz{product['imageURL']}",
+                            'market_place': "sello.uz"
+                        }
+                    )
+
+                def get_price(API):
+                    price = API.get('price', '0')
+                    return float(price)
+
+                API.sort(key=get_price, reverse=False)
+
+                return API
+            else:
+                return ("Selloda mahsulot topilmadi,", status.HTTP_204_NO_CONTENT)
         else:
-            return ("Selloda mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
-    else:
-        return ("Status code:", response.status_code)
-        
-def olcha(encoded_query, olcha_api_link, allProducts):
-    
+            print('Sello mahsulot topilmadi, HTTP istek hatası')
+
+async def fetch_olcha(session, url):
+    async with session.get(url) as response:
+        return await response.json()
+
+async def olcha_async(encoded_query, olcha_api_link, allProducts):
     headers = {
         "Accept-Language": "oz"
     }
-    response = requests.get(f"{olcha_api_link}{encoded_query}", headers=headers)
-    
-    if response.status_code == 200:    
-        data = response.json()
-        products = data['data']['products'][0:5]
-        API = []
-        
-        if products:
-            for product in products:
-                
-                if product['discount_price']:
-                    price = product['discount_price']
-                else:
-                    price = product['total_price']
-                total_price = int(product['total_price'])
-                API.append(
-                    {
-                        'name': product['name_oz'],
-                        'old_price': total_price if price > total_price else None,
-                        'price': int(price),
-                        'link': f"https://olcha.uz/oz/product/view/{product['alias']}/",
-                        'image_link': product['main_image']
-                    }
-                )
 
-                allProducts.append(
-                    {
-                        'name': product['name_oz'],
-                        'old_price': total_price if price > total_price else None,
-                        'price': int(price),
-                        'link': f"https://olcha.uz/oz/product/view/{product['alias']}/",
-                        'image_link': product['main_image'],
-                        'market_place': "olcha.uz"
-                    }
-                )
-            
-            def get_price(API):
-                price = API.get('price', '0')
-                return float(price)
-            
-            API.sort(key=get_price, reverse=False)
-            return API
+    async with aiohttp.ClientSession(headers=headers) as session:
+        url = f"{olcha_api_link}{encoded_query}"
+        html_content = await fetch_olcha(session, url)
+
+        if html_content:
+            data = html_content
+            products = data['data']['products'][0:5]
+            API = []
+
+            if products:
+                for product in products:
+                    if product['discount_price']:
+                        price = product['discount_price']
+                    else:
+                        price = product['total_price']
+                    total_price = int(product['total_price'])
+                    API.append(
+                        {
+                            'name': product['name_oz'],
+                            'old_price': total_price if price > total_price else None,
+                            'price': int(price),
+                            'link': f"https://olcha.uz/oz/product/view/{product['alias']}/",
+                            'image_link': product['main_image']
+                        }
+                    )
+
+                    allProducts.append(
+                        {
+                            'name': product['name_oz'],
+                            'old_price': total_price if price > total_price else None,
+                            'price': int(price),
+                            'link': f"https://olcha.uz/oz/product/view/{product['alias']}/",
+                            'image_link': product['main_image'],
+                            'market_place': "olcha.uz"
+                        }
+                    )
+
+                def get_price(API):
+                    price = API.get('price', '0')
+                    return float(price)
+
+                API.sort(key=get_price, reverse=False)
+
+                return API
+            else:
+                return ("Olchada mahsulot topilmadi,", status.HTTP_204_NO_CONTENT)
         else:
-            return ("Olchada mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
-    else:
-        return ("Status code:", response.status_code)
+            print('Olcha mahsulot topilmadi, HTTP istek hatası')
 
-def texnomart(encoded_query, texnomart_api_link, allProducts):
-    
+async def fetch_texnomart(session, url):
+    async with session.get(url) as response:
+        return await response.json()
+
+async def texnomart_async(encoded_query, texnomart_api_link, allProducts):
     headers = {
         "Accept-Language": "uz"
     }
-    response = requests.get(f"{texnomart_api_link}{encoded_query}&sort=&page=1", headers=headers)
-    
-    if response.status_code == 200:  
-        data = response.json() 
+
+    async with aiohttp.ClientSession(headers=headers) as session:
+        url = f"{texnomart_api_link}{encoded_query}&sort=&page=1"
+        data = await fetch_texnomart(session, url)
+
         products = data['data']['products']
         searching_products = []
+
         for product in products:
             if unquote(encoded_query).lower() in product['name'].lower():
                 searching_products.append(product)
-            else:
-                pass
-         
+
         API = []
         
         searching_products = searching_products if searching_products else products
         if searching_products:
-            # if not searching_products:
-                
             for product in searching_products[0:5]:
-                
                 price = product['sale_price'] if product['sale_price'] else product['old_price']
                 low_price = get_all_low_price(allProducts=allProducts)
+
                 if low_price:
                     if price < low_price[0]['price']:
                         pass
                     else:
-                # Mahsulotlarni saralashda texnomart qidiruv funksiyasi so'rovga taaluqli bo'lmagan natijalarni ko'rsatgani uchun barcha mahsulotlar ichidan eng arzonidan arzonroq bo'lgan mahsulotlar ro'yhatga qo'shilmasligi uchun
-
                         API.append(
                             {
                                 'name': product['name'],
@@ -442,7 +449,7 @@ def texnomart(encoded_query, texnomart_api_link, allProducts):
                                 'image_link': product['image']
                             }
                         )
-                        
+
                         allProducts.append(
                             {
                                 'name': product['name'],
@@ -453,19 +460,59 @@ def texnomart(encoded_query, texnomart_api_link, allProducts):
                                 'market_place': "texnomart.uz"
                             }
                         )
-            
-            def get_price(API):
-                price = API.get('price', '0')
-                return float(price)
-            
-            API.sort(key=get_price, reverse=False)
-            return API
+            if API:
+                def get_price(API):
+                    price = API.get('price', '0')
+                    return float(price)
+
+                API.sort(key=get_price, reverse=False)
+                return API
+            else:
+                return ("Mahsulot topilmadi,", status.HTTP_204_NO_CONTENT)
         else:
-            return ("Mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
-    else:
-        return ("Status code:", response.status_code)
+            return ("Mahsulot topilmadi,", status.HTTP_204_NO_CONTENT)
+    
 
+async def main(product_name, allProducts):
 
+        
+        try:
+            result_asaxiy = await asaxiy_async(encoded_query=product_name, allProducts=allProducts)
+        except Exception as e:
+            result_asaxiy = "ERROR: " + str(e)
+            print(e)
+            
+        try:
+            result_zoodmall = await zoodmall_async(product_name, zoodmall_api_link=zoodmall_api_link, allProducts=allProducts)
+        except Exception as e:
+            result_zoodmall = "ERROR: " + str(e)
+            print(e)
+
+        try:
+            result_sello = await sello_async(product_name, sello_api_link=sello_api_link, allProducts=allProducts)
+        except Exception as e:
+            result_sello = "ERROR: " + str(e)
+            print(e)
+
+        try:
+            result_olcha = await olcha_async(product_name, olcha_api_link=olcha_api_link, allProducts=allProducts)
+        except Exception as e:
+            result_olcha = "ERROR: " + str(e)
+            print(e)
+
+        try:
+            result_texnomart = await texnomart_async(product_name, texnomart_api_link=texnomart_api_link, allProducts=allProducts)
+        except Exception as e:
+            result_texnomart = "ERROR: " + str(e)
+            print(e)
+
+        try:
+            result_all = get_all_low_price(allProducts=allProducts)
+        except Exception as e:
+            result_all = "ERROR: " + str(e)
+            print(e)
+            
+        return (result_asaxiy, result_zoodmall, result_olcha, result_sello, result_texnomart, result_all)
 
 class SearchProductView(APIView):
     permission_classes = [IsAdminUserOrReadOnly]
@@ -476,59 +523,23 @@ class SearchProductView(APIView):
         encoded_query = quote(product_name)
         if encoded_query:
 
+            results = asyncio.run(main(product_name=encoded_query, allProducts=allProducts))
             try:
                 result_uzum = uzum(encoded_query=product_name, allProducts=allProducts)
             except Exception as e:
                 result_uzum = "ERROR: " + str(e)
                 print(e)
-            
-            try:
-                result_asaxiy = asaxiy(encoded_query=encoded_query, allProducts=allProducts)
-            except Exception as e:
-                result_asaxiy = "ERROR: " + str(e)
-                print(e)
-                
-            try:
-                result_zoodmall = zoodmall(encoded_query, zoodmall_api_link=zoodmall_api_link, allProducts=allProducts)
-            except Exception as e:
-                result_zoodmall = "ERROR: " + str(e)
-                print(e)
-
-            try:
-                result_sello = sello(encoded_query, sello_api_link=sello_api_link, allProducts=allProducts)
-            except Exception as e:
-                result_sello = "ERROR: " + str(e)
-                print(e)
-
-            try:
-                result_olcha = olcha(encoded_query, olcha_api_link=olcha_api_link, allProducts=allProducts)
-            except Exception as e:
-                result_olcha = "ERROR: " + str(e)
-                print(e)
-
-            try:
-                result_texnomart = texnomart(encoded_query, texnomart_api_link=texnomart_api_link, allProducts=allProducts)
-            except Exception as e:
-                result_texnomart = "ERROR: " + str(e)
-                print(e)
-
-            try:
-                result_all = get_all_low_price(allProducts=allProducts)
-            except Exception as e:
-                result_all = "ERROR: " + str(e)
-                print(e)
-            
             try:
                 return Response({
                 "products": {
                     "uzum": result_uzum,
-                    "asaxiy": result_asaxiy,
-                    "zoodmall": result_zoodmall,
-                    "sello": result_sello,
-                    "olcha": result_olcha,
-                    "texnomart": result_texnomart
+                    "asaxiy": results[0],
+                    "zoodmall": results[1],
+                    "sello": results[3],
+                    "olcha": results[2],
+                    "texnomart": results[4]
                 }, 
-                "all": result_all
+                "all": results[-1]
                                    })
             except Exception as e:
                 return Response(f"Error message: {e}")
