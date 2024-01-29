@@ -57,50 +57,65 @@ def uzum(encoded_query, allProducts):
         json=json_data(
             encoded_query,
             offset)).json()
-    
-    if response:
+    try:
         uzum_page = response.get('data').get('makeSearch')
-        data = uzum_page['items'][0:5]
-        for item in data:
-            item = item['catalogCard']
+    except:
+        uzum_page = False
+        
+    if uzum_page:
+            
+        data = uzum_page['items']
+        searching_products = []
+
+        for product in data:
+            item = product['catalogCard']
             uzum_pr_name = item['title']
-            uzum_pr_old_price = item['minFullPrice'] if item['minFullPrice'] else None
-            uzum_pr_min_price = item['minSellPrice']
-            uzum_pr_link = item['productId']
-            uzum_pr_image = item['photos'][0]['link']['high']
-            products.append(
-                {
-                    'name': uzum_pr_name,
-                    'old_price': uzum_pr_old_price,
-                    'price': uzum_pr_min_price,
-                    'link': f"https://uzum.uz/uz/product/{uzum_pr_link}",
-                    'image_link': uzum_pr_image
-                }
-            )
-
-            allProducts.append(
-                {
-                    'name': uzum_pr_name,
-                    'old_price': uzum_pr_old_price,
-                    'price': uzum_pr_min_price,
-                    'link': f"https://uzum.uz/uz/product/{uzum_pr_link}",
-                    'image_link': uzum_pr_image,
-                    'market_place': "uzum.uz"
-                }
-            )
+            if encoded_query.lower() in uzum_pr_name.lower():
+                searching_products.append(product)
             
-        
-        def get_price(products):
-            price_str = products.get('price', '0')
-            
-            return float(price_str)
-        
-        products.sort(key=get_price, reverse=False)
-        
-        return products
+        if searching_products:
+            for item in searching_products[0:5]:
+                item = item['catalogCard']
+                uzum_pr_name = item['title']
+                uzum_pr_old_price = item['minFullPrice'] if item['minFullPrice'] else None
+                uzum_pr_min_price = item['minSellPrice']
+                uzum_pr_link = item['productId']
+                uzum_pr_image = item['photos'][0]['link']['high']
+                products.append(
+                    {
+                        'name': uzum_pr_name,
+                        'old_price': uzum_pr_old_price,
+                        'price': uzum_pr_min_price,
+                        'link': f"https://uzum.uz/uz/product/{uzum_pr_link}",
+                        'image_link': uzum_pr_image
+                    }
+                )
 
+                allProducts.append(
+                    {
+                        'name': uzum_pr_name,
+                        'old_price': uzum_pr_old_price,
+                        'price': uzum_pr_min_price,
+                        'link': f"https://uzum.uz/uz/product/{uzum_pr_link}",
+                        'image_link': uzum_pr_image,
+                        'market_place': "uzum.uz"
+                    }
+                )
+                
+            
+            def get_price(products):
+                price_str = products.get('price', '0')
+                
+                return float(price_str)
+            
+            products.sort(key=get_price, reverse=False)
+            
+            return products
+        else:
+            return ("Uzumda bunday mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )   
     else:
         return ("Uzumda bunday mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )   
+
      
 def zoodmall(encoded_query, zoodmall_api_link, allProducts):
     
@@ -220,51 +235,61 @@ def asaxiy(encoded_query, allProducts):
         product_check = asaxiy_soup.find("div", attrs={"class":"row custom-gutter mb-40"})
         if product_check:
             for product in asaxiy_products:
+                searching_products = []
 
-                asaxiy_pr_name = product.find("span", attrs={"class":"product__item__info-title"}).text.strip()
-                for a in product.find_all('a', href=True):
-                    if a['href'].startswith('/uz/product'):
-                        asaxiy_pr_link = a['href']
-                    else:
-                        None
+                for product in asaxiy_products:
+                    asaxiy_pr_name = product.find("span", attrs={"class": "product__item__info-title"}).text.strip()
+                    if unquote(encoded_query).lower() in asaxiy_pr_name.lower():
+                        searching_products.append(product)
                 
-                asaxiy_pr_image = product.find("img", attrs={"class":"img-fluid lazyload"}).get('data-src')
-                try:
-                    asaxiy_pr_old_price = product.find("span",attrs={"class":"product__item-old--price"}).text.strip()[0:-4].replace(' ', '')
-                except Exception as e:
-                    asaxiy_pr_old_price = None
-                asaxiy_pr_price = product.find("span",attrs={"class":"product__item-price"}).text.strip()[0:-4].replace(' ', '')
-  
-                products.append(
-                    {
-                        'name': asaxiy_pr_name,
-                        'old_price': int(asaxiy_pr_old_price) if asaxiy_pr_old_price else None,
-                        'price': int(asaxiy_pr_price),
-                        'link': "https://www.asaxiy.uz"+asaxiy_pr_link if asaxiy_pr_link else None,
-                        'image_link': asaxiy_pr_image
-                    }
-                )
+                
+                if searching_products:
+                    for product in searching_products[0:5]:
+                        asaxiy_pr_name = product.find("span", attrs={"class": "product__item__info-title"}).text.strip()
+                        for a in product.find_all('a', href=True):
+                            if a['href'].startswith('/uz/product'):
+                                asaxiy_pr_link = a['href']
+                            else:
+                                None
 
-                allProducts.append(
-                    {
-                        'name': asaxiy_pr_name,
-                        'old_price': int(asaxiy_pr_old_price) if asaxiy_pr_old_price else None,
-                        'price': int(asaxiy_pr_price),
-                        'link': "https://www.asaxiy.uz"+asaxiy_pr_link,
-                        'image_link': asaxiy_pr_image,
-                        'market_place': "asaxiy.uz"
-                    }
-                )
-            
-            def get_price(products):
-                price_str = products.get('price', '0')
-                return float(price_str)
-            
-            products.sort(key=get_price, reverse=False)
-            
-            return products
-        else:
-            return ("Asaxiyda mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
+                        asaxiy_pr_image = product.find("img", attrs={"class": "img-fluid lazyload"}).get('data-src')
+                        try:
+                            asaxiy_pr_old_price = product.find("span", attrs={"class": "product__item-old--price"}).text.strip()[0:-4].replace(' ', '')
+                        except Exception as e:
+                            asaxiy_pr_old_price = None
+                        asaxiy_pr_price = product.find("span", attrs={"class": "product__item-price"}).text.strip()[0:-4].replace(' ', '')
+
+                        products.append(
+                            {
+                                'name': asaxiy_pr_name,
+                                'old_price': int(asaxiy_pr_old_price) if asaxiy_pr_old_price else None,
+                                'price': int(asaxiy_pr_price),
+                                'link': "https://www.asaxiy.uz" + asaxiy_pr_link if asaxiy_pr_link else None,
+                                'image_link': asaxiy_pr_image
+                            }
+                        )
+
+                        allProducts.append(
+                            {
+                                'name': asaxiy_pr_name,
+                                'old_price': int(asaxiy_pr_old_price) if asaxiy_pr_old_price else None,
+                                'price': int(asaxiy_pr_price),
+                                'link': "https://www.asaxiy.uz" + asaxiy_pr_link,
+                                'image_link': asaxiy_pr_image,
+                                'market_place': "asaxiy.uz"
+                            }
+                        )
+
+                    def get_price(products):
+                        price_str = products.get('price', '0')
+                        return float(price_str)
+
+                    products.sort(key=get_price, reverse=False)
+
+                    return products
+                else:
+                    return ("Asaxiyda mahsulot topilmadi,", status.HTTP_204_NO_CONTENT)
+                    
     else:
         print(f'Asaxiy mahsulot topilmadi, {response.status_code}')
    
