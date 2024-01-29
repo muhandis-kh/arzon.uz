@@ -21,7 +21,7 @@ from .serializers import UserRegistrationSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from .permissions import IsAdminUserOrReadOnly
 from .throttles import CustomBearerTokenRateThrottle
-import openvpn_api
+
 from .config import json_data, list_headers
 from pprint import pprint
 import json
