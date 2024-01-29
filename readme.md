@@ -37,7 +37,7 @@ Loyiha test rejimida ishlamoqda, iltimos xatoga duch kelganingizda menga xabar q
 > bo'lsangiz, xatolik haqida [xabardor](https://github.com/muhandis-kh/arzon.uz/issues/new)
 > qilishni unutmang.
 
-Loyihani demo holatda https://arzon-uz.vercel.app/search-product/?query=query yoki https://arzon-uz.onrender.com/search-product/?query=query ushbu manzilga query o'rniga mahsulot nomini kiritish orqali ishlatib ko'rish mumkin. Loyiha bepul serverda joylashganligi va resurslar cheklanganligi uchun loyihadan foydalanish kunlik 10 ta so'rov bilan cheklangan.
+Loyihani demo holatda https://arzonuz.up.railway.app/search-product/?query=query yoki https://arzon-uz.vercel.app/search-product/?query=query yoki https://arzon-uz.onrender.com/search-product/?query=query ushbu manzillardan biriga query o'rniga mahsulot nomini kiritish orqali ishlatib ko'rish mumkin. Loyiha bepul serverda joylashganligi va resurslar cheklanganligi uchun loyihadan foydalanish kunlik 10 ta so'rov bilan cheklangan.
 
 ## Loyihani ishlab chiqishda uchralgan qiyinchiliklar va yechimlari STAR metodi orqali
 <details>
@@ -103,6 +103,6 @@ Loyihani demo holatda https://arzon-uz.vercel.app/search-product/?query=query yo
     </ul>
 </details>
 
-Loyihani telegram orqali ham https://t.me/arzonro_bot ushbu bot orqali ishlatib ko'rishingiz mumkin. Xatoliklar haqida iltimos xabar bering.
+Loyihani telegram orqali ham https://t.me/arzoni_qayerda_bot ushbu bot orqali ishlatib ko'rishingiz mumkin. Xatoliklar haqida iltimos xabar bering.
 
 <i><b>RAHMAT</b></i>
