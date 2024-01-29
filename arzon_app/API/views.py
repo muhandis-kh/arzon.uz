@@ -4,6 +4,7 @@ from rest_framework import status
 import requests
 from urllib.parse import quote
 from data.data import zoodmall_api_link, sello_api_link, olcha_api_link, texnomart_api_link, korrektor_token
+import httpx
 
 from bs4 import BeautifulSoup
 import requests
@@ -12,15 +13,18 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
-
+import random
 from .renderers import UserRenderer
 from .serializers import UserRegistrationSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from .permissions import IsAdminUserOrReadOnly
 from .throttles import CustomBearerTokenRateThrottle
-
+import openvpn_api
+from .config import json_data, list_headers
+from pprint import pprint
+import json
 
 # chrome_options = webdriver.ChromeOptions()
 # chrome_options.add_argument("--headless")
@@ -43,46 +47,33 @@ def get_all_low_price(allProducts):
 
 
 def uzum(encoded_query, allProducts):
-    cookie_string ="_gcl_au=1.1.1126409477.1692954200; _ym_uid=1692954201826510623; _ym_d=1692954201; tmr_lvid=dc19ff24c244eaeb0b692aa75568caa2; tmr_lvidTS=1692954201019; _ga_RHGS2343RN=GS1.1.1693758930.1.0.1693758950.40.0.0; _gac_UA-235641814-1=1.1693759116.CjwKCAjw3dCnBhBCEiwAVvLcu9OaizA8Hor87bxHnSpPWHWXXIxRXvf_qo4pKroEfsJZRrQv7Uq3UxoCK0sQAvD_BwE; _gcl_aw=GCL.1693759116.CjwKCAjw3dCnBhBCEiwAVvLcu9OaizA8Hor87bxHnSpPWHWXXIxRXvf_qo4pKroEfsJZRrQv7Uq3UxoCK0sQAvD_BwE; uzum-customers=2b752e6686aab24cef51c33c5267da31|480c8e27df8fb2794d4d4e35bad9c66c; cf_clearance=5ynHMyT2waEd8Xf0v2zlP0Pm9fnc1hU95TWudLo8fXM-1700238205-0-1-7573300d.ec035a4e.22726fed-0.2.1700238205; access_token=eyJraWQiOiIwcE9oTDBBVXlWSXF1V0w1U29NZTdzcVNhS2FqYzYzV1N5THZYb0ZhWXRNIiwiYWxnIjoiRWREU0EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJVenVtIElEIiwiaWF0IjoxNzAwNDAyMzcwLCJzdWIiOiI4NGU1MTljNS04YTFhLTQ5OTgtOTNkMC01MzFkYjM1ZDk1MTYiLCJhdWQiOlsidXp1bV9hcHBzIiwibWFya2V0L3dlYiJdLCJldmVudHMiOnt9LCJleHAiOjE3MDA0MDMwOTB9.WHQUPveqtUjt3HNHinpUQYrP_LkykVykJRW2q-iq0Aa-TmB6W6aWgcgLAisjStaMAdrA1NYFenw9dpkGQwgOCg; _gid=GA1.2.136165838.1700402527; _ga=GA1.1.1521422407.1692954200; _ym_isad=1; _ym_visorc=b; tmr_detect=0%7C1700402530475; _ga_EZ8RKY9S93=GS1.2.1700402530.32.0.1700402530.0.0.0; _ga_7KCSSWWYYD=GS1.1.1700402379.38.1.1700402532.34.0.0"
-    # cookie_string = "_gcl_au=1.1.1126409477.1692954200; _ym_uid=1692954201826510623; _ym_d=1692954201; tmr_lvid=dc19ff24c244eaeb0b692aa75568caa2; tmr_lvidTS=1692954201019; _ga_RHGS2343RN=GS1.1.1693758930.1.0.1693758950.40.0.0; _gac_UA-235641814-1=1.1693759116.CjwKCAjw3dCnBhBCEiwAVvLcu9OaizA8Hor87bxHnSpPWHWXXIxRXvf_qo4pKroEfsJZRrQv7Uq3UxoCK0sQAvD_BwE; _gcl_aw=GCL.1693759116.CjwKCAjw3dCnBhBCEiwAVvLcu9OaizA8Hor87bxHnSpPWHWXXIxRXvf_qo4pKroEfsJZRrQv7Uq3UxoCK0sQAvD_BwE; _gid=GA1.2.805844873.1700220645; _ym_isad=1; uzum-customers=2b752e6686aab24cef51c33c5267da31|480c8e27df8fb2794d4d4e35bad9c66c; _ym_visorc=b; access_token=eyJraWQiOiIwcE9oTDBBVXlWSXF1V0w1U29NZTdzcVNhS2FqYzYzV1N5THZYb0ZhWXRNIiwiYWxnIjoiRWREU0EiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJVenVtIElEIiwiaWF0IjoxNzAwMjM4MTgyLCJzdWIiOiI4NGU1MTljNS04YTFhLTQ5OTgtOTNkMC01MzFkYjM1ZDk1MTYiLCJhdWQiOlsidXp1bV9hcHBzIiwibWFya2V0L3dlYiJdLCJldmVudHMiOnt9LCJleHAiOjE3MDAyMzg5MDJ9.naqKhZgWuLFKyQTkS0SI_8UY1TogtkUE2YaIVRK8HtxCgXkK6W0KLmT1rY3_cRVFVC6_ZcFhaEuQ-cjcei3WAw; _gat_UA-235641814-1=1; _ga=GA1.2.1521422407.1692954200; tmr_detect=1%7C1700238196332; _ga_7KCSSWWYYD=GS1.1.1700236624.36.1.1700238196.40.0.0; cf_clearance=Dqt4KEa_wyV8bLaEcNo06._93UXGHiNE1oCbqpSl_G8-1700238200-0-1-7573300d.ec035a4e.22726fed-0.2.1700238200; _ga_EZ8RKY9S93=GS1.2.1700236639.31.1.1700238197.0.0.0"
-    browser.add_cookie({'name': 'cookie_name', 'value': cookie_string, 'domain': 'uzum.uz'})
-    browser.get(f"https://uzum.uz/uz/search?query={encoded_query}&needsCorrection=1")
-    print(f"https://uzum.uz/uz/search?query={encoded_query}&needsCorrection=1")
-    print(browser.page_source)
-    wait = WebDriverWait(browser, 30)
+    products = []
+    offset = 0
 
-    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "ui-card")))
-
-    uzum_page = browser.page_source
-    uzum_soup = BeautifulSoup(uzum_page, "lxml")
+    session = requests.Session()
+    response = session.post(
+        'https://graphql.uzum.uz/',
+        headers=list_headers,
+        json=json_data(
+            encoded_query,
+            offset)).json()
     
-    
-    product_check = uzum_soup.find("div", attrs={"id":"category-products"})
-    
-    if product_check:
-
-        uzum_products_data = uzum_soup.find("div", attrs={"id":"category-products"})
-
-        uzum_products = uzum_products_data.find_all("div", attrs={'data-test-id':"item__product-card"})
-
-        uzum_products = uzum_products[0:5]
-        
-        products = []
-        
-        for product in uzum_products:
-            uzum_pr_block = product.find("a", attrs={"class":"subtitle-item"})
-            uzum_pr_image = product.find("img", attrs={"class":"main-card-icon-and-classname-collision-made-to-minimum"}).get('src')
-            uzum_pr_name = uzum_pr_block.text.strip()
-            uzum_pr_link = uzum_pr_block.get('href')
-
-            
-            
-            uzum_pr_price = product.find("span",attrs={"class":"currency product-card-price slightly medium"}).text.strip().replace('\xa0', ' ').replace(' ', '').replace(',', ' ').replace("so'm", "")
+    if response:
+        uzum_page = response.get('data').get('makeSearch')
+        data = uzum_page['items'][0:5]
+        for item in data:
+            item = item['catalogCard']
+            uzum_pr_name = item['title']
+            uzum_pr_old_price = item['minFullPrice'] if item['minFullPrice'] else None
+            uzum_pr_min_price = item['minSellPrice']
+            uzum_pr_link = item['productId']
+            uzum_pr_image = item['photos'][0]['link']['high']
             products.append(
                 {
                     'name': uzum_pr_name,
-                    'price': int(uzum_pr_price),
-                    'link': "https://uzum.uz"+uzum_pr_link,
+                    'old_price': uzum_pr_old_price,
+                    'price': uzum_pr_min_price,
+                    'link': f"https://uzum.uz/uz/product/{uzum_pr_link}",
                     'image_link': uzum_pr_image
                 }
             )
@@ -90,13 +81,14 @@ def uzum(encoded_query, allProducts):
             allProducts.append(
                 {
                     'name': uzum_pr_name,
-                    'price': int(uzum_pr_price),
-                    'link': "https://uzum.uz"+uzum_pr_link,
+                    'old_price': uzum_pr_old_price,
+                    'price': uzum_pr_min_price,
+                    'link': f"https://uzum.uz/uz/product/{uzum_pr_link}",
                     'image_link': uzum_pr_image,
                     'market_place': "uzum.uz"
                 }
             )
-        
+            
         
         def get_price(products):
             price_str = products.get('price', '0')
@@ -125,15 +117,28 @@ def zoodmall(encoded_query, zoodmall_api_link, allProducts):
         
     
         data = response.json()
-        products = data['marketList'][0:5]
+        products = data['marketList']
+        searching_products = []
+        for product in products:
+            if unquote(encoded_query) in product['name'].lower():
+                searching_products.append(product)
+            else:
+                pass
+
         API = []
         
         if products:
-        
-            for product in products:
+            searching_products = searching_products if searching_products else products
+            for product in searching_products[0:5]:
+                if product['localCrossedPrice']:
+                    old_price = product['localCrossedPrice'] if product['localCrossedPrice'] > product['localPrice'] else None
+                else:
+                    old_price = None
+                
                 API.append(
                     {
                         'name': product['name'],
+                        'old_price': old_price,
                         'price': product['localPrice'],
                         'link': f"https://www.zoodmall.uz/product/{product['productId']}/",
                         'image_link': product['imgUrl']
@@ -143,6 +148,7 @@ def zoodmall(encoded_query, zoodmall_api_link, allProducts):
                 allProducts.append(
                     {
                         'name': product['name'],
+                        'old_price': old_price,
                         'price': product['localPrice'],
                         'link': f"https://www.zoodmall.uz/product/{product['productId']}/",
                         'image_link': product['imgUrl'],
@@ -162,13 +168,50 @@ def zoodmall(encoded_query, zoodmall_api_link, allProducts):
         print("Status code", response.status_code)
                
 def asaxiy(encoded_query, allProducts):
+    user_agent_list = [
+    #Chrome
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 5.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
+    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+    #Firefox
+    'Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)',
+    'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko',
+    'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)',
+    'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko',
+    'Mozilla/5.0 (Windows NT 6.2; WOW64; Trident/7.0; rv:11.0) like Gecko',
+    'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko',
+    'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.0; Trident/5.0)',
+    'Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko',
+    'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)',
+    'Mozilla/5.0 (Windows NT 6.1; Win64; x64; Trident/7.0; rv:11.0) like Gecko',
+    'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/6.0)',
+    'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)',
+    'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)'
+    ]
+    url = f'http://asaxiy.uz/uz/product/sort=rate-high?key={encoded_query}'   
+
+    proxy = {
+        "http": "http://103.242.104.101:8080",
+        "https": "https://103.242.104.101:8080"
+    }
+
+    headers = {
+        "User-Agent": random.choice(user_agent_list)
+    }
     
-    url = f'https://asaxiy.uz/uz/product/sort=rate-high?key={encoded_query}'
     response = requests.get(url)
+     
 
     if response.status_code == 200:
         html_content = response.content
-        asaxiy_soup = BeautifulSoup(html_content, 'html.parser')
+        asaxiy_soup = BeautifulSoup(html_content, 'lxml')
         asaxiy_products = asaxiy_soup.find_all("div", attrs={"class":"product__item d-flex flex-column justify-content-between"})
         asaxiy_products = asaxiy_products[0:5]
         
@@ -179,15 +222,25 @@ def asaxiy(encoded_query, allProducts):
             for product in asaxiy_products:
 
                 asaxiy_pr_name = product.find("span", attrs={"class":"product__item__info-title"}).text.strip()
-                asaxiy_pr_link = product.find("a").get('href')
-                asaxiy_pr_image = product.find("img", attrs={"class":"img-fluid lazyload"}).get('data-src')
-                asaxiy_pr_price = product.find("span",attrs={"class":"product__item-price"}).text.strip()[0:-4].replace(' ', '')
+                for a in product.find_all('a', href=True):
+                    if a['href'].startswith('/uz/product'):
+                        asaxiy_pr_link = a['href']
+                    else:
+                        None
                 
+                asaxiy_pr_image = product.find("img", attrs={"class":"img-fluid lazyload"}).get('data-src')
+                try:
+                    asaxiy_pr_old_price = product.find("span",attrs={"class":"product__item-old--price"}).text.strip()[0:-4].replace(' ', '')
+                except Exception as e:
+                    asaxiy_pr_old_price = None
+                asaxiy_pr_price = product.find("span",attrs={"class":"product__item-price"}).text.strip()[0:-4].replace(' ', '')
+  
                 products.append(
                     {
                         'name': asaxiy_pr_name,
+                        'old_price': int(asaxiy_pr_old_price) if asaxiy_pr_old_price else None,
                         'price': int(asaxiy_pr_price),
-                        'link': "https://www.asaxiy.uz"+asaxiy_pr_link,
+                        'link': "https://www.asaxiy.uz"+asaxiy_pr_link if asaxiy_pr_link else None,
                         'image_link': asaxiy_pr_image
                     }
                 )
@@ -195,6 +248,7 @@ def asaxiy(encoded_query, allProducts):
                 allProducts.append(
                     {
                         'name': asaxiy_pr_name,
+                        'old_price': int(asaxiy_pr_old_price) if asaxiy_pr_old_price else None,
                         'price': int(asaxiy_pr_price),
                         'link': "https://www.asaxiy.uz"+asaxiy_pr_link,
                         'image_link': asaxiy_pr_image,
@@ -213,37 +267,35 @@ def asaxiy(encoded_query, allProducts):
             return ("Asaxiyda mahsulot topilmadi,", status.HTTP_204_NO_CONTENT )
     else:
         print(f'Asaxiy mahsulot topilmadi, {response.status_code}')
-
-    
+   
 def sello(encoded_query, sello_api_link, allProducts):
     
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
-        "Fingerprint": "10b4ad6ce60f51511b502f34c14f8966",
-        "Language": "uz" 
+
     }
-    response = requests.get(f"{sello_api_link}{encoded_query}&page=1&perPage=30&sortBy=price_asc", headers=headers)
+    response = requests.get(f"{sello_api_link}{encoded_query}&page=1&perPage=30&sortBy=name_desc", headers=headers)
     
     
     if response.status_code == 200:
         
     
-        data = response.json()
-
+        data = response.json()  
         products = data['hits'][0:5]
         API = []
         
         if products:
             for product in products:
-                
+
                 if product['discounted_price']:
-                    price = product['discounted_price']
+                    sello_pr_price = product['discounted_price']
                 else:
-                    price = product['price']
+                    sello_pr_price = product['price']
                 API.append(
                     {
                         'name': product['name'],
-                        'price': price,
+                        'old_price': product['price'] if sello_pr_price < product['price'] else None,
+                        'price': sello_pr_price, 
                         'link': f"https://sello.uz/uz/product/{product['slug']}/",
                         'image_link': f"https://static.sello.uz/unsafe/x500/https://static.sello.uz{product['imageURL']}"
                     }
@@ -252,7 +304,8 @@ def sello(encoded_query, sello_api_link, allProducts):
                 allProducts.append(
                     {
                         'name': product['name'],
-                        'price': price,
+                        'old_price': product['price'] if sello_pr_price < product['price'] else None,
+                        'price': sello_pr_price,
                         'link': f"https://sello.uz/uz/product/{product['slug']}/",
                         'image_link': f"https://static.sello.uz/unsafe/x500/https://static.sello.uz{product['imageURL']}",
                         'market_place': "sello.uz"
@@ -289,10 +342,12 @@ def olcha(encoded_query, olcha_api_link, allProducts):
                     price = product['discount_price']
                 else:
                     price = product['total_price']
+                total_price = int(product['total_price'])
                 API.append(
                     {
                         'name': product['name_oz'],
-                        'price': price,
+                        'old_price': total_price if price > total_price else None,
+                        'price': int(price),
                         'link': f"https://olcha.uz/oz/product/view/{product['alias']}/",
                         'image_link': product['main_image']
                     }
@@ -301,7 +356,8 @@ def olcha(encoded_query, olcha_api_link, allProducts):
                 allProducts.append(
                     {
                         'name': product['name_oz'],
-                        'price': price,
+                        'old_price': total_price if price > total_price else None,
+                        'price': int(price),
                         'link': f"https://olcha.uz/oz/product/view/{product['alias']}/",
                         'image_link': product['main_image'],
                         'market_place': "olcha.uz"
@@ -328,27 +384,34 @@ def texnomart(encoded_query, texnomart_api_link, allProducts):
     
     if response.status_code == 200:  
         data = response.json() 
-        products = data['data']['products'][0:5]
+        products = data['data']['products']
+        searching_products = []
+        for product in products:
+            if unquote(encoded_query).lower() in product['name'].lower():
+                searching_products.append(product)
+            else:
+                pass
+         
         API = []
         
-        if products:
-            for product in products:
+        searching_products = searching_products if searching_products else products
+        if searching_products:
+            # if not searching_products:
                 
-                if product['sale_price']:
-                    price = product['sale_price']
-                else:
-                    price = product['loan_price']
+            for product in searching_products[0:5]:
                 
-                # Mahsulotlarni saralashda texnomart qidiruv funksiyasi so'rovga taaluqli bo'lmagan natijalarni ko'rsatgani uchun barcha mahsulotlar ichidan eng arzonidan arzonroq bo'lgan mahsulotlar ro'yhatga qo'shilmasligi uchun
+                price = product['sale_price'] if product['sale_price'] else product['old_price']
                 low_price = get_all_low_price(allProducts=allProducts)
-
                 if low_price:
                     if price < low_price[0]['price']:
                         pass
                     else:
+                # Mahsulotlarni saralashda texnomart qidiruv funksiyasi so'rovga taaluqli bo'lmagan natijalarni ko'rsatgani uchun barcha mahsulotlar ichidan eng arzonidan arzonroq bo'lgan mahsulotlar ro'yhatga qo'shilmasligi uchun
+
                         API.append(
                             {
                                 'name': product['name'],
+                                'old_price': product['old_price'],
                                 'price': price,
                                 'link': f"https://texnomart.uz/product/detail/{product['id']}",
                                 'image_link': product['image']
@@ -358,7 +421,8 @@ def texnomart(encoded_query, texnomart_api_link, allProducts):
                         allProducts.append(
                             {
                                 'name': product['name'],
-                                'price': price,
+                                'old_price': product['old_price'],
+                                'price': product['sale_price'] if product['sale_price'] else product['old_price'],
                                 'link': f"https://texnomart.uz/product/detail/{product['id']}",
                                 'image_link': product['image'],
                                 'market_place': "texnomart.uz"
@@ -387,12 +451,11 @@ class SearchProductView(APIView):
         encoded_query = quote(product_name)
         if encoded_query:
 
-            # uzum.uz uchun selenium bilan qilingan funksiya serverda xato bergani uchun o'chirib qo'yildi
-            # try:
-            #     result_uzum = uzum(encoded_query=encoded_query, allProducts=allProducts)
-            # except Exception as e:
-            #     result_uzum = "ERROR: " + str(e)
-            #     print(e)
+            try:
+                result_uzum = uzum(encoded_query=product_name, allProducts=allProducts)
+            except Exception as e:
+                result_uzum = "ERROR: " + str(e)
+                print(e)
             
             try:
                 result_asaxiy = asaxiy(encoded_query=encoded_query, allProducts=allProducts)
@@ -433,7 +496,7 @@ class SearchProductView(APIView):
             try:
                 return Response({
                 "products": {
-                    # "uzum": result_uzum,
+                    "uzum": result_uzum,
                     "asaxiy": result_asaxiy,
                     "zoodmall": result_zoodmall,
                     "sello": result_sello,
