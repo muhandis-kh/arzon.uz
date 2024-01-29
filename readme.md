@@ -42,47 +42,67 @@ Loyihani demo holatda https://arzon-uz.vercel.app/search-product/?query=query yo
 ## Loyihani ishlab chiqishda uchralgan qiyinchiliklar va yechimlari STAR metodi orqali
 <details>
   <summary>
-    1-muammo. Ma'lumotlarni scraping qilish uchun usul tanlash 
+    1-muammo. Internet-do'konlaridan ma'lumotlarni yig'ish uchun mavjud uslublardan eng maqbuluni tanlash
   </summary>
   <br>
   <ul>
       <li>
-        Telegramdagi bir qancha kitob tarqatuvchi kanal va guruhlar bor va ulardagi kitob ma'lumotlarini yaratilgan model asosida ma'lumotlar omboriga qo'shish kerak. Albatta kitoblar fayllari 80 mingdan ko'p ekanligini hisobga olganda buni manual holatda bajarish imkonsiz
+        <i>Situation:</i> Internet-do'konlaridan ma'lumotlarni yig'ish uchun mavjud uslublardan eng maqbuluni tanlash
       </li>
       <li>
-        Bu ma'lumotlarni python orqali yig'ib, uni kod orqali ma'lumotlar bazasiga qo'shmoqchi bo'ldim
+        <i>Task:</i> Ma'lumotlarni to'plash uchun bir necha usullar mavjud va ularning kamchilik va ustunliklarini taqqoslash kerak
       </li>
       <li>
-        Buning uchun internetda mavjud bo'lgan resurslardan foydalanish uchun izlanish o'tkardim va bir nechta yechimlar ichidan https://github.com/estebanpdl/telegram-tracker bu repositoryda joylashgan koddan foydalanishga qaror qildim, sababi uchbu kod orqali bir nechta kanaldagi ma'lumotlarni bitta faylda to'plash mumkin edi. Bu esa kod orqali fayllarni boshqarishni osonlashtirdi
-        Barcha ma'lumotlarni bitta faylda yig'ildani yaxshi lekin bu fayl hajmi githubning fayl limitidan oshib ketdi, men fayllarni ma'lumotlar bazasiga qo'shish uchun online serverdan foydalanmoqchiligim uchun u fayl github repo sida bo'lishi kerak edi. Men nega fayl hajmi bunchalik katta bo'lganligini sabablarini qidirdim. Fayl hajmi katta ekanligiga sabab yuqoridagi data scraper telegram kanaldagi barcha xabarlar ma'lumotlarini olib faylga joylagani edi ya'ni mening faylimda kanalga yuborilgan text, audio, reklama, sticker va shunga o'xshash xabarlarning barchasi mavjud edi. Men bu fayldagi ma'lumotlarni saralashim va fayl turiga qarab alohida faylga joylashim kerak edi. Buning uchun Pandas kutubxonasidan foydalandim, bunu ishlatishda internetdagi ma'lumotlar va ChatGPT katta yordam berdi.  
+       <i>Action:</i> Buning uchun mavjud usullarni o'rganishni boshladim. Internet saytini scraping qilish uchun ilk usullardan biri selenium, request va BeatifulSoup kutubxonalaridan foydalanish. Selenium afzalligi javascript kutubxonalari bilan hosil qilingan internet saytlaridan ham ma'lumotlarni olish mumkinligi edi lekin selenium loyihaning sekin ishlashiga sabab bo'lishi mumkin, shuni hisobga olgan holda avvalo ma'lumotlarni olmoqchi bo'lgan internet-do'konlaridan yuborilgan so'rovlar qaysi API ga yuborilganligini browserda developer tool orqali kuzatdim. Bu usul orqali asaxiy.uz dan tashqari qolgan internet-do'konlarda foydalanuvchi mahsulot qidirganda ishlatiladigan API manzilini topdim va API kutadigan headerslarni error messagelar orqali aniqlab, har bir sayt uchun sozladim. asaxiy.uz uchun avvaliga seleium bilan scraping qilish yo'llarini tanladim.   
       </li>
       <li>
-      Saralash yakunlangandan so'ng endi menda limitni oshmagan va faqatgina kerakli ma'lumotlardan tashkil topgan fayl bor edi. Buning natijasida online serverda ma'lumotlarni qo'shishim mumkin edi
+     <i>Result:</i> Bu orqali loyihadagi asosiy muammo yechildi va keyingi qadamlar belgilandi
       </li>
     </ul>
 </details>
 
-<details>  
+<details>
   <summary>
-    2-muammo. Fayllarni yagona telegram kanalda to'plash va ularning nomlarini lotin alifbosiga o'tkazish
+    2-muammo. Asaxiy.uz uchun selenium bilan yozilgan funksiya loyiha tezligini sekinlashtirdi
   </summary>
-    <br>
-    <ul>
+  <br>
+  <ul>
       <li>
-        Loyihada kitob nomlari kirill va lotin alifbosida yozilgan edi va bu ma'lumotlar omboridan kitoblarni saralashda qiyinchilik tug'dirdi va kitob fayllari ko'plab kanallarda joylashganligi ularni yo'qolib qolish havfini oshirdi.
+        <i>Situation:</i> Asaxiy.uz uchun selenium orqali yozilgan funksiyalar bepul server internet-tezligi va saytlarning yuklanish uchun kutish vaqtlari uzun bo'lganligi uchun API ga yuborilgan so'rovdan javob kelishi 3-5 daqiqagacha cho'zildi
       </li>
       <li>
-        Loyihadagi fayllarni saralash oson bo'lishi uchun fayllar ismini lotin alifbosiga o'tkazishim va fayllarni barchasini yagona telegram kanalda to'plashim kerak edi.
+        <i>Task:</i> Muammoga sabab bo'lgan funksiyani request kutubxonasi bilan o'zgartirish
       </li>
       <li>
-        Ma'lumotlar bazasiga model asosida kitob ma'lumotlarini kiritishdan oldin kitob nomlari kiril alifbosida ekanligi yoki emasligini tekshirishim kerak edi. Buning uchun internetdan yozuv alifbosini aniqlash uchun sodda funksiya topdim va uni ishlatib ko'rdim, hammasi joyida funksiya ishladi. Endi aniqlangan kirill alifbosidagi kitob nomlarini lotin alifbosiga o'tkazishim kerak edi. Buning uchun avvalroq eshitganim <a href="https://korrektor.uz/">korrektor.uz</a> loyihasidan foydalandim, to'g'risi loyiha asosida python kutubxonasi ishlab chiqilgani va korrektor.uz dan foydalanish Uzinfocom tufayli bepul bo'lgani menga juda qo'l keldi. Barcha fayl nomlari lotin alifbosida ma'lumotlar bazasiga joylanganidan so'ng bu ma'lumotlar asosida barcha fayllarni yagona telegram kanalda to'plash uchun telegram bot kodladim va uni ishga tushirdim.
+       <i>Action:</i> Ma'lumotlarni olish uchun selenium orqali qilingan funksiyani, request bilan o'zgartirdim, lekin sayt API siga ruhsat bo'lmaganligi uchun mahsulot qidirish linki orqali mahsulot ma'lumotlarini HTML ko'rinishida olib va ma'lumotlarni BeatifulSoup orqali ajratib oldim 
       </li>
       <li>
-        Bu ishlarning tufayli endi loyihadagi barcha fayl nomlari lotin alifbosida saqlangan va ularni saralash osonlashgan edi. Yana fayllar yo'qolib qolmasligi uchun barcha fayllar yagona telegram kanalda muvaffiqiyatli joylandi.
+     <i>Result:</i> Funksiya o'zgartirilganidan so'ng serveridan javob kelishi 7-12 (25 barobar) soniyaga qadar tezlashdi, buning natijasida API tezligi sezilarli o'sdi 
+      </li>
+    </ul>
+</details>
+
+<details>
+  <summary>
+    3-muammo. Saytlarning ichki qidiruv tizimidagi muammolar
+  </summary>
+  <br>
+  <ul>
+      <li>
+        <i>Situation:</i> Internet-do'konlarida qidiruv qilinganida eng arzon mahsulotlar eng boshida chiqadi va bu mening loyihamda kamchiliklarga sabab bo'ldi. Masalan Samsung A54 smartfoni qidirilganda Samsung A54 uchun himoya oynasi takliflari chiqdi
+      </li>
+      <li>
+        <i>Task:</i> Muammoga sabab bo'lgan internet-do'kondagi mahsulotlarni API ga qo'shishdan oldin tekshiruv o'tkazish uchun funksiya yozish
+      </li>
+      <li>
+       <i>Action:</i> Muammo kelib chiqgan internet-do'kondagi mahsulotlarni API ga qo'shishdan oldin, shu so'rov bo'yicha boshqa do'konlardagi mahsulotlar narxlari orasidan eng arzon mahsulot narxi belgilab olinib va muammoga sabab bo'lgan internet-do'kondagi mahsulot narxi bilan solishtirish va agar narxlar orasidagi farq katta bo'lsa API ma'lumotlariga qo'shmasligini ta'minlovchi tekshiruvchi funksiya yozildi
+      </li>
+      <li>
+     <i>Result:</i> Buning natijasida foydalanuvchi mahsulot qidirganida so'rovga taaluqli bo'lgan mahsulotlar chiqishi ta'minlandi, API samaradorligi oshirildi
       </li>
     </ul>
 </details>
 
 Loyihani telegram orqali ham https://t.me/arzonro_bot ushbu bot orqali ishlatib ko'rishingiz mumkin. Xatoliklar haqida iltimos xabar bering.
 
-Rahmat
+<i><b>RAHMAT</b></i>
